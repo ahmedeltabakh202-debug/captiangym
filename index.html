@@ -47,7 +47,9 @@ th,td{text-align:start;padding:10px 8px;border-bottom:1px solid var(--line)}
 .tag{padding:2px 10px;border-radius:99px;font-size:.8rem;font-weight:600;border:1.5px solid}
 .tag.ok{color:var(--ok)}.tag.bad{color:var(--bad)}
 .del{background:none;border:0;color:var(--bad);cursor:pointer;font:inherit}
-.adm-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+.adm-tabs{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin-bottom:14px}
+.adm-tab span{white-space:nowrap}
+@media(max-width:480px){.adm-tab{padding:8px 2px;font-size:.68rem}.adm-tab svg{width:22px;height:22px}}
 .adm-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:78px;padding:8px 4px;border-radius:14px;border:1.5px solid var(--line);background:linear-gradient(160deg,#222 0%,#141414 100%);color:var(--ink);font:inherit;font-weight:700;font-size:.78rem;cursor:pointer;transition:.15s}
 .adm-tab svg{width:24px;height:24px;color:var(--acc)}
 .adm-tab.on{background:var(--acc);border-color:var(--acc);color:#000}
@@ -407,6 +409,7 @@ body.menu .overlay{opacity:1;visibility:visible}
       <button type="button" class="adm-tab" data-adm="members" onclick="admTab('members')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>المشتركين</span></button>
       <button type="button" class="adm-tab" data-adm="sections" onclick="admTab('sections')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>الأقسام</span></button>
       <button type="button" class="adm-tab" data-adm="sync" onclick="admTab('sync')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M3 21v-5h5"/></svg><span>المزامنة</span></button>
+      <button type="button" class="adm-tab" id="save-file-btn" onclick="saveFile()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 19h16"/></svg><span>حفظ الملف</span></button>
     </div>
     <div class="adm-panel" id="adm-home">
     <h2>تعديل الرئيسية</h2>
@@ -464,6 +467,7 @@ body.menu .overlay{opacity:1;visibility:visible}
 </section>
 </main>
 <script>
+window.__GYM_SRC="<!DOCTYPE html>\n"+document.documentElement.outerHTML;
 function lsGet(k,fb){try{var v=localStorage.getItem(k);return v==null?fb:v}catch(e){return fb}}
 function lsSet(k,v){try{localStorage.setItem(k,v);try{if(window.__syncPush)window.__syncPush(k)}catch(e){}return true}catch(e){return false}}
 function ssGet(k,fb){try{var v=sessionStorage.getItem(k);return v==null?fb:v}catch(e){return fb}}
@@ -1088,6 +1092,32 @@ document.getElementById("ov").onclick=function(){menu(false)};
 document.addEventListener("keydown",function(e){if(e.key==="Escape")menu(false)});
 window.addEventListener("hashchange",route);
 
+function saveFile(){
+  var msg=function(t){alert(t)};
+  try{
+    var src=window.__GYM_SRC||"";
+    if(!src){msg("مقدرتش أجهز الملف");return}
+    var bi=src.search(/<body/i);if(bi<0)bi=src.length;
+    var headPart=src.slice(0,bi),bodyPart=src.slice(bi);
+    var so="<scr"+"ipt id=\"gym-seed\">",sc="</scr"+"ipt>",a0=headPart.indexOf(so);
+    if(a0>=0){var a1=headPart.indexOf(sc,a0);if(a1>=0)headPart=headPart.slice(0,a0)+headPart.slice(a1+sc.length).replace(/^\s+/,"")}
+    src=headPart+bodyPart;
+    var data={},stamp=Date.now();
+    for(var i=0;i<localStorage.length;i++){var k=localStorage.key(i);if(SYNC_RE.test(k))data[k]=localStorage.getItem(k)}
+    var cfg=localStorage.getItem("gym-sync-cfg");
+    var seed={stamp:stamp,data:data,cfg:cfg};
+    var js=JSON.stringify(seed).replace(/</g,"\\u003c").replace(/\u2028/g,"\\u2028").replace(/\u2029/g,"\\u2029");
+    var code=so+'(function(){try{var S='+js+';var ls=localStorage,st=Number(ls.getItem("gym-seed-stamp")||0);if(S.stamp<=st)return;var m={};try{m=JSON.parse(ls.getItem("gym-sync-meta")||"{}")}catch(e){}Object.keys(S.data).forEach(function(k){if((Number(m[k])||0)>S.stamp)return;ls.setItem(k,S.data[k]);m[k]=S.stamp});ls.setItem("gym-sync-meta",JSON.stringify(m));if(S.cfg&&!ls.getItem("gym-sync-cfg"))ls.setItem("gym-sync-cfg",S.cfg);ls.setItem("gym-seed-stamp",String(S.stamp))}catch(e){}})();'+sc+"\n";
+    var idx=src.search(/<head[^>]*>/i);
+    if(idx<0){msg("مقدرتش أجهز الملف");return}
+    var end=src.indexOf(">",idx)+1;
+    src=src.slice(0,end)+"\n"+code+src.slice(end);
+    var blob=new Blob([src],{type:"text/html;charset=utf-8"});
+    var url=URL.createObjectURL(blob),a=document.createElement("a");
+    a.href=url;a.download="index.html";document.body.appendChild(a);a.click();
+    setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url)},1500);
+  }catch(e){msg("فشل حفظ الملف: "+(e&&e.message||e))}
+}
 function boot(){
   try{load();applyHome();SVCS.forEach(function(s){try{renderContent(s)}catch(e){}});try{drawEx()}catch(e){}try{drawAdm()}catch(e){}try{checkAdmin()}catch(e){}try{route()}catch(e){}}catch(e){}
   try{syncInit()}catch(e){}
@@ -1097,15 +1127,15 @@ function boot(){
 }
 
 /* ===== Firebase sync (REST + live stream) ===== */
-var SYNC_DEF={url:"https://workshop-374c6-default-rtdb.europe-west1.firebasedatabase.app/",code:"mala-2020"};
+var SYNC_DEF={url:"https://workshop-sync-ahmed-default-rtdb.europe-west1.firebasedatabase.app",code:"workshop-ahmed-2027"};
 var SYNC_RE=/^(gym-members|gym-home|gym-ex-videos|gym-pclients|gym-content-[\w-]+|gym-results-[\w-]+)$/;
 var syncState={status:"idle",last:0,msg:"",es:null,timers:{},poll:null,busy:null};
-function syncCfg(){var c={};try{c=JSON.parse(lsGet("gym-sync-cfg","{}")||"{}")}catch(e){}return{url:(c.url||SYNC_DEF.url).trim(),code:(c.code||SYNC_DEF.code).trim(),on:c.on===false?false:true}}
+function syncCfg(){var c={};try{c=JSON.parse(lsGet("gym-sync-cfg","{}")||"{}")}catch(e){}if(c.v!==2){c={on:c.on}}var u=(c.url||SYNC_DEF.url).trim(),mo=u.match(/^https?:\/\/[^\/\s?#]+/i);if(mo)u=mo[0];return{url:u,code:(c.code||SYNC_DEF.code).trim(),on:c.on===false?false:true}}
 function syncBase(){var c=syncCfg();return c.url.replace(/\/+$/,"")+"/gyms/"+encodeURIComponent(c.code)}
 function syncMeta(){try{return JSON.parse(lsGet("gym-sync-meta","{}")||"{}")}catch(e){return{}}}
 function syncSetMeta(k,t){var m=syncMeta();m[k]=t;try{localStorage.setItem("gym-sync-meta",JSON.stringify(m))}catch(e){}}
 function syncOk(){syncState.status="ok";syncState.last=Date.now();syncState.msg="";if(syncState.poll){clearInterval(syncState.poll);syncState.poll=null}syncRender()}
-function syncErr(e){var m=String((e&&e.message)||e||"");if(/401|403/.test(m))m+=" (راجع قواعد Firebase)";if(/Failed to fetch|NetworkError|Load failed/i.test(m))m="مفيش اتصال بقاعدة البيانات. اتأكد من النت، وإن الملف مفتوح من متصفح عادي (كروم/سفاري) أو من موقع مرفوع، مش من جوه تطبيق المحادثة، وإن الرابط صح";syncState.status="error";syncState.msg=m;syncRender();syncStartPoll()}
+function syncErr(e){var m=String((e&&e.message)||e||"");if(/401|403/.test(m))m+=" (راجع قواعد Firebase)";if(/404/.test(m))m="HTTP 404 · قاعدة البيانات مش موجودة على الرابط ده. افتح Firebase > Realtime Database وانسخ الرابط من فوق بالظبط";if(/Failed to fetch|NetworkError|Load failed/i.test(m)){var h="";try{h=new URL(syncCfg().url).host}catch(e){}m="الصفحة مش قادرة توصل لـ "+h+" . السبب الأغلب إن الملف مفتوح من معاينة الملفات/المحادثة (بتمنع الاتصال بالإنترنت). ارفع الملف على موقع (Firebase Hosting / Netlify / GitHub Pages) وافتحه من سفاري"};syncState.status="error";syncState.msg=m;syncRender();syncStartPoll()}
 function syncStartPoll(){if(syncState.poll||!syncCfg().on)return;syncState.poll=setInterval(function(){syncAll().catch(function(){})},20000)}
 function syncStop(){if(syncState.es){try{syncState.es.close()}catch(e){}syncState.es=null}if(syncState.poll){clearInterval(syncState.poll);syncState.poll=null}}
 window.__syncPush=function(k){
@@ -1142,11 +1172,36 @@ function syncRefresh(k){
     else if(k.indexOf("gym-results-")===0){var s2=k.slice(12),bx=document.getElementById("results-"+s2);if(!(bx&&bx.contains(document.activeElement)))renderResults(s2)}
   }catch(e){}
 }
+function syncCandidates(){
+  var u=syncCfg().url,m=u.match(/^https?:\/\/([^.\/]+?)(?:-default-rtdb)?(?:\.([a-z0-9-]+))?\.(?:firebasedatabase\.app|firebaseio\.com)/i);
+  if(!m)return[];
+  var id=m[1],out=[];
+  ["https://"+id+"-default-rtdb.firebaseio.com","https://"+id+".firebaseio.com","https://"+id+"-default-rtdb.europe-west1.firebasedatabase.app","https://"+id+"-default-rtdb.asia-southeast1.firebasedatabase.app"].forEach(function(x){if(x!==u&&out.indexOf(x)<0)out.push(x)});
+  return out;
+}
+function syncRecover(){
+  var c=syncCfg(),list=syncCandidates(),i=0;
+  function next(){
+    if(i>=list.length)return Promise.resolve(false);
+    var cand=list[i++];
+    return fetch(cand+"/.json?shallow=true").then(function(r){
+      if(r.ok){lsSet("gym-sync-cfg",JSON.stringify({v:2,url:cand,code:c.code,on:c.on}));var f=document.getElementById("sync-url");if(f)f.value=cand;return true}
+      return next();
+    }).catch(function(){return next()});
+  }
+  return next();
+}
+function syncGetAll(){
+  return fetch(syncBase()+".json").then(function(r){
+    if(r.status===404)return syncRecover().then(function(ok){if(!ok)throw new Error("HTTP 404");return fetch(syncBase()+".json")});
+    return r;
+  }).then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()});
+}
 function syncAll(){
   if(!syncCfg().on){syncRender();return Promise.reject(new Error("المزامنة متوقفة"))}
   if(syncState.busy)return syncState.busy;
   syncState.status="syncing";syncRender();
-  syncState.busy=fetch(syncBase()+".json").then(function(r){if(!r.ok)throw new Error("HTTP "+r.status);return r.json()}).then(function(data){
+  syncState.busy=syncGetAll().then(function(data){
     data=data||{};var changed=0,pushes=[];
     Object.keys(data).forEach(function(k){if(syncApplyRemote(k,data[k]))changed++});
     var keys=[];try{for(var i=0;i<localStorage.length;i++){var kk=localStorage.key(i);if(SYNC_RE.test(kk))keys.push(kk)}}catch(e){}
@@ -1193,7 +1248,7 @@ function saveSync(){
   var u=document.getElementById("sync-url").value.trim(),cd=document.getElementById("sync-code").value.trim(),on=document.getElementById("sync-on").checked;
   if(!/^https:\/\/\S+$/.test(u)){alert("رابط قاعدة البيانات لازم يبدأ بـ https://");return}
   if(!cd||/[.$#\[\]\/\s]/.test(cd)){alert("كود الجيم مينفعش فيه مسافات أو . $ # [ ] /");return}
-  lsSet("gym-sync-cfg",JSON.stringify({url:u,code:cd,on:on}));
+  lsSet("gym-sync-cfg",JSON.stringify({v:2,url:u,code:cd,on:on}));
   syncStop();syncRender();
   var res=document.getElementById("sync-result");
   if(!on){if(res)res.textContent="تم الحفظ، المزامنة متوقفة.";return}
