@@ -34,3 +34,10 @@ self.addEventListener("fetch", (e) => {
     return res;
   })));
 });
+{
+  "rules": {
+    ".read": "now < 1797541200000",  // 2026-12-18
+    ".write": "now < 1797541200000",  // 2026-12-18
+  }
+}
+
