@@ -156,6 +156,58 @@ body.np #tb-home.on{background:transparent;color:var(--ink)}body.np #tb-home.on 
 .np-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;color:var(--acc);font-size:1.05rem}
 .np-x{border:0;background:transparent;color:var(--ink);font-size:1.1rem;padding:4px 8px;cursor:pointer}
 .np-box .notif-item{margin-bottom:10px;padding:10px 12px}
+
+.grp-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.grp-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:26px 12px;background:var(--card);border:1.5px solid var(--line);border-top:4px solid var(--acc);border-radius:20px;text-decoration:none;color:var(--ink);text-align:center}
+.grp-card svg{width:46px;height:46px;color:var(--acc)}.grp-card b{font-size:1.2rem}.grp-card small{color:var(--mute)}
+.ch-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.ch-head h2{margin:0;flex:1;font-size:1.6rem}
+.ch-back{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;border:1.5px solid var(--line);color:var(--acc);text-decoration:none;font-size:1.6rem;line-height:1}
+.ch-dot{width:11px;height:11px;border-radius:50%;background:#777}.ch-dot.on{background:var(--ok)}.ch-dot.off{background:#e11d2e}
+.ch-err{background:#2a1512;border:1px solid var(--bad);color:var(--bad);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:.9rem;display:none}
+.ch-list{direction:ltr;display:flex;flex-direction:column;gap:8px;padding-bottom:96px}
+.ch-msg{direction:rtl;max-width:82%;padding:8px 10px;border-radius:14px;background:var(--card);border:1px solid var(--line);align-self:flex-start;word-break:break-word}
+.ch-msg.own{align-self:flex-end;background:var(--acc);color:#000;border-color:var(--acc)}
+.ch-msg .nm{font-size:.8rem;font-weight:800;display:block;margin-bottom:2px}
+.ch-msg .nm small{font-weight:400;opacity:.7;margin-inline-start:6px;direction:ltr;display:inline-block}
+.ch-msg p{margin:0;white-space:pre-wrap}
+.ch-msg .tm2{display:block;font-size:.68rem;opacity:.65;margin-top:3px;text-align:end}
+.ch-msg img{max-width:100%;max-height:320px;border-radius:10px;display:block;cursor:pointer}
+.ch-msg audio{width:230px;max-width:100%;height:40px}
+.ch-msg.pend{opacity:.6}.ch-msg.fail{border-color:#e11d2e;cursor:pointer}
+.ch-msg .cx{margin-top:6px;border:0;border-radius:8px;background:rgba(0,0,0,.25);color:inherit;font:inherit;font-size:.75rem;padding:3px 10px;cursor:pointer}
+.ch-composer{position:fixed;left:0;right:0;bottom:calc(68px + env(safe-area-inset-bottom,0px));z-index:11;background:#0f0f0f;border-top:1px solid var(--line);padding:8px 10px}
+.ch-row{display:flex;gap:6px;align-items:flex-end;direction:rtl}
+.ch-row textarea{flex:1;max-height:110px;resize:none;margin:0;min-height:44px}
+.ch-ib{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--card);color:var(--acc);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem}
+.ch-ib svg{width:22px;height:22px}.ch-ib.send{background:var(--acc);color:#000}
+.ch-rec{display:none;align-items:center;gap:12px;direction:rtl;min-height:44px}
+.ch-rec b{flex:1;font-family:Anton,Impact,sans-serif;font-size:1.3rem;color:var(--bad);direction:ltr;text-align:start}
+.ch-rec-dot{width:12px;height:12px;border-radius:50%;background:#e11d2e;animation:npulse 1s infinite}
+body.in-chat .fab-results{display:none}
+#lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:12px}
+#lb.on{display:flex}#lb img{max-width:100%;max-height:100%;border-radius:8px}
+.lk-wrap{margin-bottom:10px}
+.lk-add{display:flex;align-items:center;gap:8px;width:100%;padding:10px 14px;border-radius:12px;border:1.5px dashed #ff4d4d;background:rgba(255,77,77,.08);color:#ff6b6b;font:inherit;font-weight:700;cursor:pointer}
+.lk-add svg{width:22px;height:22px;flex:none}
+.lk-row{display:grid;grid-template-columns:1fr 36px;gap:6px;margin-top:8px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px}
+.lk-row input{margin:0;grid-column:1}
+.lk-row .lk-x{grid-column:2;grid-row:1 / span 2;border:0;border-radius:8px;background:#2a1512;color:var(--bad);font-size:1rem;cursor:pointer}
+.lk-btns{display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.lk-btn{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--bg);border:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:700}
+.lk-btn .pl{flex:none;width:34px;height:24px;border-radius:7px;background:#ff0033;display:flex;align-items:center;justify-content:center}
+.lk-btn .pl svg{width:12px;height:12px;color:#fff}
+.lk-btn span.t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lk-btn small{color:var(--mute);font-weight:400}
+.exp-bar{background:#2a1512;border:1.5px solid var(--bad);color:var(--bad);border-radius:14px;padding:10px 12px;margin-bottom:14px}
+.exp-bar b{display:block;margin-bottom:6px}
+.exp-chip{display:inline-block;margin:3px 3px 3px 0;padding:4px 12px;border-radius:99px;background:rgba(255,123,107,.14);border:1px solid var(--bad);color:var(--bad);font:inherit;font-size:.85rem;cursor:pointer}
+.mem-act{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.mini{background:none;border:0;color:var(--acc);cursor:pointer;font:inherit;padding:0}
+.mem-edit{display:flex;gap:6px;align-items:center}.mem-edit input{width:100px;margin:0;padding:6px 8px}
+.me-days{font-family:Anton,Impact,sans-serif;font-size:3rem;color:var(--acc);line-height:1}
+.day-card.today{border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
+.today-tag{background:var(--acc);color:#000;border-radius:99px;padding:1px 10px;font-size:.72rem;font-weight:800;margin-inline-start:8px}
 </style>
 </head>
 <body>
@@ -180,6 +232,8 @@ body.np #tb-home.on{background:transparent;color:var(--ink)}body.np #tb-home.on 
   <a href="#nutrition" data-t="nutrition"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg><span>خطط تغذية</span></a>
   <a href="#exercises" data-t="exercises"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>التمارين</span></a>
   <a href="#private" data-t="private"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>Private</span></a>
+  <a href="#group" data-t="group"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>Group</span></a>
+  <a href="#me" data-t="me"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><span>اشتراكي</span></a>
   <a href="#subs" data-t="subs" id="nav-subs" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>الاشتراكات</span></a>
   <a href="#admin" data-t="admin"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>الإدارة</span></a>
 </nav>
@@ -437,11 +491,34 @@ body.np #tb-home.on{background:transparent;color:var(--ink)}body.np #tb-home.on 
   <div class="card scroll"><table><thead><tr><th>الاسم</th><th>الموبايل</th><th>ينتهي</th><th>الحالة</th><th></th></tr></thead><tbody id="tb2"></tbody></table></div>
 </section>
 
+<section id="me">
+  <h1 style="font-size:2.1rem">اشتراكي</h1>
+  <div id="me-login" class="card">
+    <p class="mute">اكتب كود المشترك اللي الكابتن ادّاهولك عشان تشوف اشتراكك وتمرينة الأسبوع.</p>
+    <label for="me-code">كود المشترك</label>
+    <input id="me-code" inputmode="numeric" placeholder="مثال: 12345" style="margin:8px 0 12px">
+    <p id="me-err" style="color:var(--bad);margin:0 0 10px;display:none">الكود غلط، راجع الكابتن</p>
+    <button class="btn" type="button" onclick="meLogin()" style="width:100%">عرض اشتراكي</button>
+  </div>
+  <div id="me-dash" style="display:none"></div>
+</section>
+
 <section id="allresults">
   <h1 style="font-size:2.1rem">النتائج</h1>
   <div class="ar-chips" id="ar-chips"></div>
   <div id="ar-list"></div>
 </section>
+<section id="group">
+  <h1 style="font-size:2.1rem">Group</h1>
+  <p class="mute">اختار الجروب اللي عايز تدخله وتدردش مع الكل</p>
+  <div class="grp-cards">
+    <a class="grp-card" href="#chat-kickbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 10-13h-7z"/></svg><b>كيك بوكس</b><small>دردشة جماعية</small></a>
+    <a class="grp-card" href="#chat-champs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><b>الأبطال</b><small>دردشة جماعية</small></a>
+  </div>
+</section>
+<section id="chat-kickbox"></section>
+<section id="chat-champs"></section>
+<div id="lb" onclick="this.classList.remove('on')"><img alt=""></div>
 <section id="exercises">
   <h1 style="font-size:2.1rem">مكتبة التمارين</h1>
   <div class="chips" id="chips"></div>
@@ -459,6 +536,7 @@ body.np #tb-home.on{background:transparent;color:var(--ink)}body.np #tb-home.on 
     <p id="login-err" style="color:var(--bad);margin-top:10px;display:none">كلمة المرور غلط</p>
   </div>
   <div id="admin-panel" style="display:none">
+    <div id="exp-bar" class="exp-bar" style="display:none"></div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
       <p class="mute" style="margin:0">مسجل كأدمن</p>
       <button class="btn alt" onclick="doLogout()">خروج</button>
@@ -488,11 +566,18 @@ body.np #tb-home.on{background:transparent;color:var(--ink)}body.np #tb-home.on 
     <form class="row card" id="f">
       <div><label>الاسم</label><input id="n" required></div>
       <div><label>الموبايل</label><input id="p" inputmode="tel"></div>
+      <div><label>كود الدخول (اختياري)</label><input id="mpw" inputmode="numeric" placeholder="تلقائي"></div>
       <div><label>الاشتراك</label><select id="pl"><option value="1">شهر</option><option value="3">٣ شهور</option><option value="12">سنة</option></select></div>
       <button class="btn" type="submit">إضافة</button>
     </form>
     <div class="stats" id="st"></div>
     <div class="card scroll"><table><thead><tr><th>الاسم</th><th>الموبايل</th><th>ينتهي</th><th>الحالة</th><th></th></tr></thead><tbody id="tb"></tbody></table></div>
+    <div class="card" style="margin-top:16px">
+      <h3 style="margin:0 0 6px">تمرينة الأسبوع لكل المشتركين</h3>
+      <p class="mute" style="margin:0 0 12px">اللي تكتبه هنا بيظهر عند كل المشتركين في صفحة «اشتراكي»</p>
+      <div id="mplan-days"></div>
+      <button class="btn" type="button" onclick="saveMPlan()" style="width:100%">حفظ التمرينة</button>
+    </div>
     </div>
     <div class="adm-panel" id="adm-sections">
     <h2>الأقسام</h2>
@@ -689,20 +774,35 @@ function drawMembers(tbodyId,statsId,filter){
   var now=Date.now(),act=0,list=M;
   if(filter){var q=filter.trim().toLowerCase();list=M.filter(function(m){return (m.name||"").toLowerCase().indexOf(q)>=0||(m.phone||"").indexOf(q)>=0})}
   if(!list.length){var tr=ce("tr"),td=ce("td","",filter?"مفيش نتائج":"لسه مفيش مشتركين");td.colSpan=5;td.style.textAlign="center";td.style.color="var(--mute)";tr.appendChild(td);tb.appendChild(tr)}
-  list.forEach(function(m){var i=M.indexOf(m),ok=m.end>now;if(ok)act++;
-    var tr=ce("tr");tr.appendChild(ce("td","",m.name));tr.appendChild(ce("td","",m.phone||"—"));tr.appendChild(ce("td","",fmt(m.end)));
+  list.forEach(function(m){var ok=m.end>now;if(ok)act++;
+    var tr=ce("tr"),tdn=ce("td","",m.name);
+    if(isAdmin){var sm=ce("small","",m.pw?"كود: "+m.pw:"بدون كود");sm.style.cssText="display:block;color:var(--mute)";tdn.appendChild(sm)}
+    tr.appendChild(tdn);tr.appendChild(ce("td","",m.phone||"—"));tr.appendChild(ce("td","",fmt(m.end)));
     var t=ce("td");t.appendChild(ce("span","tag "+(ok?"ok":"bad"),ok?"ساري":"منتهي"));tr.appendChild(t);
-    var x=ce("td");if(isAdmin){var b=ce("button","del","حذف");b.onclick=function(){M.splice(i,1);save();drawAdm();drawSubs()};x.appendChild(b)}
+    var x=ce("td");
+    if(isAdmin){
+      var box=ce("div","mem-act");
+      var bR=ce("button","mini","تجديد شهر");bR.type="button";bR.onclick=function(){var d=new Date(Math.max(m.end,Date.now()));d.setMonth(d.getMonth()+1);m.end=d.getTime();save();drawAdm();drawSubs();toast("تم تجديد اشتراك "+m.name)};
+      var bC=ce("button","mini",m.pw?"تغيير الكود":"إنشاء كود");bC.type="button";bC.onclick=function(){editMemberCode(x,m)};
+      var bD=ce("button","del","حذف");bD.type="button";tapConfirm(bD,function(){var k=M.indexOf(m);if(k>=0)M.splice(k,1);save();drawAdm();drawSubs()});
+      box.appendChild(bR);box.appendChild(bC);box.appendChild(bD);x.appendChild(box);
+    }
     tr.appendChild(x);tb.appendChild(tr)});
   var st=document.getElementById(statsId);if(!st)return;st.innerHTML="";
   var total=filter?list.length:M.length,active=filter?list.filter(function(m){return m.end>now}).length:act;
   [[total,"إجمالي"],[active,"سارية"],[total-active,"منتهية"]].forEach(function(a){var d=ce("div");d.appendChild(ce("b","",a[0]));d.appendChild(document.createTextNode(a[1]));st.appendChild(d)});
 }
-function drawAdm(){drawMembers("tb","st","")}
+function drawAdm(){drawMembers("tb","st","");try{drawExpBar()}catch(e){}}
 function drawSubs(){var q=document.getElementById("sub-search");drawMembers("tb2","st2",q?q.value:"")}
 var formEl=document.getElementById("f");
-if(formEl)formEl.onsubmit=function(e){e.preventDefault();var d=new Date();d.setMonth(d.getMonth()+Number(document.getElementById("pl").value));
-  M.unshift({name:document.getElementById("n").value.trim(),phone:document.getElementById("p").value.trim(),end:d.getTime()});save();this.reset();drawAdm();drawSubs()};
+if(formEl)formEl.onsubmit=function(e){e.preventDefault();
+  var d=new Date();d.setMonth(d.getMonth()+Number(document.getElementById("pl").value));
+  var pw=(document.getElementById("mpw").value||"").trim();
+  if(pw&&(pw.length<3||/\s/.test(pw))){toast("الكود لازم يكون ٣ حروف أو أرقام على الأقل من غير مسافات");return}
+  if(pw&&M.some(function(m){return String(m.pw)===pw})){toast("الكود ده مستخدم عند مشترك تاني");return}
+  if(!pw)pw=genMemberCode();
+  M.unshift({name:document.getElementById("n").value.trim(),phone:document.getElementById("p").value.trim(),end:d.getTime(),start:Date.now(),pw:pw});
+  save();this.reset();drawAdm();drawSubs();toast("تمت الإضافة. كود المشترك: "+pw)};
 
 var HOME_DEFAULTS={title:"اصنع نسخة أقوى من نفسك مع captain gym",intro:"برامج تدريب احترافية، خطط تغذية ذكية، وفريق من نخبة المدربين لمساعدتك على بلوغ أفضل أداء صحي وبدني مهما كان هدفك.",about:"بدأت رحلتي في اللياقة من الصفر، وعشان كده بفهم صعوبة البداية. أؤمن إن النتيجة بتيجي من الالتزام والتفاصيل الصغيرة، مش من الحماس المؤقت.",stat1:"+٣٠٠",stat1l:"مشترك",stat2:"٨",stat2l:"سنين خبرة",stat3:"٣",stat3l:"شهادات معتمدة"};
 function getHome(){try{var s=lsGet("gym-home",null);return s?JSON.parse(s):Object.assign({},HOME_DEFAULTS)}catch(e){return Object.assign({},HOME_DEFAULTS)}}
@@ -725,13 +825,14 @@ function checkAdmin(){
   if(isAdmin){fillHomeForm();SVCS.forEach(function(s){var ta=document.getElementById("edit-"+s);if(ta)ta.value=getContent(s)})}
   try{drawEx()}catch(e){}
   try{SVCS.forEach(renderVideos);renderNotifs();updateNotifBadge()}catch(e){}
+  try{drawExpBar();var mb=document.getElementById("mplan-days");if(isAdmin&&mb&&!mb.children.length)drawMPlanEditor()}catch(e){}
   showPrivateState();
 }
 function doLogin(){if(document.getElementById("pw").value===ADMIN_PASS){ssSet("gym-admin","1");var e=document.getElementById("login-err");if(e)e.style.display="none";document.getElementById("pw").value="";checkAdmin();drawAdm()}else{var e=document.getElementById("login-err");if(e)e.style.display="block"}}
 function doLogout(){ssDel("gym-admin");checkAdmin()}
 
 function loadResults(svc){try{return JSON.parse(lsGet("gym-results-"+svc,"[]")||"[]")}catch(e){return[]}}
-function saveResults(svc,arr){lsSet("gym-results-"+svc,JSON.stringify(arr))}
+function saveResults(svc,arr){return lsSet("gym-results-"+svc,JSON.stringify(arr))}
 function renderResults(svc){
   var box=document.getElementById("results-"+svc);if(!box)return;var arr=loadResults(svc);box.innerHTML="";
   if(isAdmin){var form=ce("div","add-result-form");form.innerHTML='<h3 style="margin:0 0 10px">إضافة نتيجة</h3><div class="row2"><div><label>قبل</label><input type="file" accept="image/*" id="before-'+svc+'"></div><div><label>بعد</label><input type="file" accept="image/*" id="after-'+svc+'"></div></div><label>وصف</label><textarea id="txt-'+svc+'"></textarea><button class="btn" onclick="addResult(\''+svc+'\')">إضافة</button>';box.appendChild(form)}
@@ -741,11 +842,40 @@ function renderResults(svc){
     if(r.before&&r.after){var wrap=ce("div","ba-wrap");var bi=ce("div","ba-item");bi.appendChild(Object.assign(ce("span","ba-label"),{textContent:"قبل"}));var bImg=ce("img");bImg.src=r.before;bi.appendChild(bImg);var ai=ce("div","ba-item");ai.appendChild(Object.assign(ce("span","ba-label"),{textContent:"بعد"}));var aImg=ce("img");aImg.src=r.after;ai.appendChild(aImg);wrap.appendChild(bi);wrap.appendChild(ai);card.appendChild(wrap)}
     else if(r.after||r.before){var img=ce("img","single-img");img.src=r.after||r.before;card.appendChild(img)}
     if(r.text)card.appendChild(ce("p","",r.text));
-    if(isAdmin){var del=ce("button","btn alt","حذف");del.style.marginTop="10px";del.style.width="100%";del.onclick=function(){if(confirm("حذف؟")){arr.splice(i,1);saveResults(svc,arr);renderResults(svc)}};card.appendChild(del)}
+    if(isAdmin){var del=ce("button","btn alt","حذف");del.style.marginTop="10px";del.style.width="100%";tapConfirm(del,function(){arr.splice(i,1);saveResults(svc,arr);renderResults(svc);toast("تم الحذف")});card.appendChild(del)}
     box.appendChild(card)});
 }
-function readFile(file){return new Promise(function(res,rej){if(!file){res(null);return}if(file.size>3.5*1024*1024){rej("كبيرة");return}var r=new FileReader();r.onload=function(e){res(e.target.result)};r.onerror=function(){rej("خطأ")};r.readAsDataURL(file)})}
-function addResult(svc){if(!isAdmin)return;var bf=document.getElementById("before-"+svc),af=document.getElementById("after-"+svc),txt=document.getElementById("txt-"+svc);var b=bf&&bf.files[0],a=af&&af.files[0];if(!b&&!a){alert("اختار صورة");return}Promise.all([readFile(b),readFile(a)]).then(function(imgs){var arr=loadResults(svc);arr.unshift({before:imgs[0],after:imgs[1],text:(txt.value||"").trim()});saveResults(svc,arr);if(bf)bf.value="";if(af)af.value="";if(txt)txt.value="";renderResults(svc)}).catch(function(e){alert(e)})}
+function readFile(file){return new Promise(function(res,rej){
+  if(!file){res(null);return}
+  var url=null;
+  try{url=URL.createObjectURL(file)}catch(e){rej("مقدرتش أقرأ الصورة");return}
+  var img=new Image();
+  img.onload=function(){
+    try{
+      var w=img.naturalWidth||img.width,h=img.naturalHeight||img.height,k=Math.min(1,1000/Math.max(w,h));
+      var c=document.createElement("canvas");c.width=Math.max(1,Math.round(w*k));c.height=Math.max(1,Math.round(h*k));
+      var x=c.getContext("2d");x.fillStyle="#fff";x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0,c.width,c.height);
+      var q=.75,d=c.toDataURL("image/jpeg",q);
+      while(d.length>300000&&q>.35){q-=.1;d=c.toDataURL("image/jpeg",q)}
+      URL.revokeObjectURL(url);res(d);
+    }catch(e){rej("فشل تجهيز الصورة")}
+  };
+  img.onerror=function(){URL.revokeObjectURL(url);rej("الصورة دي مش مدعومة، جرّب صورة JPG أو PNG")};
+  img.src=url;
+})}
+function addResult(svc){
+  if(!isAdmin)return;
+  var bf=document.getElementById("before-"+svc),af=document.getElementById("after-"+svc),txt=document.getElementById("txt-"+svc);
+  var b=bf&&bf.files[0],a=af&&af.files[0];
+  if(!b&&!a){toast("اختار صورة الأول");return}
+  toast("جاري تجهيز الصورة...");
+  Promise.all([readFile(b),readFile(a)]).then(function(imgs){
+    var arr=loadResults(svc);arr.unshift({before:imgs[0],after:imgs[1],text:(txt&&txt.value||"").trim()});
+    if(!saveResults(svc,arr)){toast("مساحة التخزين على الجهاز ممتلية، احذف نتائج قديمة وجرّب تاني");return}
+    if(bf)bf.value="";if(af)af.value="";if(txt)txt.value="";
+    renderResults(svc);toast("تمت إضافة النتيجة ✓");
+  }).catch(function(e){toast(String(e))});
+}
 
 /* Device unlock */
 function getDeviceCode(){var c=lsGet("gym-device-code",null);if(!c){c=String(Math.floor(10000+Math.random()*90000));lsSet("gym-device-code",c)}return c}
@@ -837,6 +967,20 @@ function openClientFollowup(id){
   WEEK_DAYS.forEach(function(day){
     var wrap=ce("div","admin-day-block");
     wrap.appendChild(ce("h4","",day));
+    var lkw=ce("div","lk-wrap");lkw.dataset.day=day;
+    var lkAdd=ce("button","lk-add");lkAdd.type="button";
+    lkAdd.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.3 5 12 5 12 5s-6.3 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2C2 8.76 2 12 2 12s0 3.24.4 4.8a2.5 2.5 0 0 0 1.76 1.77C5.7 19 12 19 12 19s6.3 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77C22 15.24 22 12 22 12s0-3.24-.4-4.8zM10 15V9l5.2 3z"/></svg><span>إضافة لينك يوتيوب للتمرينة</span>';
+    var lkRows=ce("div","lk-rows");
+    function addLkRow(t,u){
+      var r=ce("div","lk-row");
+      var i1=document.createElement("input");i1.placeholder="اسم التمرينة (مثال: سكوات)";i1.value=t||"";i1.dataset.f="t";i1.maxLength=60;
+      var i2=document.createElement("input");i2.placeholder="https://youtube.com/...";i2.value=u||"";i2.dataset.f="u";i2.dir="ltr";i2.inputMode="url";
+      var x=ce("button","lk-x","✕");x.type="button";x.setAttribute("aria-label","حذف اللينك");x.onclick=function(){r.remove()};
+      r.appendChild(i1);r.appendChild(i2);r.appendChild(x);lkRows.appendChild(r);
+    }
+    lkAdd.onclick=function(){addLkRow("","")};
+    ((c.planLinks&&c.planLinks[day])||[]).forEach(function(l){addLkRow(l.title,l.url)});
+    lkw.appendChild(lkAdd);lkw.appendChild(lkRows);wrap.appendChild(lkw);
     var lab=ce("label","mute","التمارين");
     lab.style.display="block";lab.style.marginBottom="4px";
     var ta=document.createElement("textarea");
@@ -885,8 +1029,20 @@ function saveClientPlan(){
   document.querySelectorAll("#plan-days textarea").forEach(function(ta){
     c.plan[ta.dataset.day]=ta.value.trim();
   });
+  if(!c.planLinks)c.planLinks={};var bad=0;
+  document.querySelectorAll("#plan-days .lk-wrap").forEach(function(w){
+    var list=[];
+    w.querySelectorAll(".lk-row").forEach(function(r,n){
+      var t=r.querySelector('[data-f="t"]').value.trim(),u=r.querySelector('[data-f="u"]').value.trim();
+      if(!u&&!t)return;
+      if(u&&!/^https?:\/\//i.test(u)&&/^[\w.-]+\.[a-z]{2,}/i.test(u))u="https://"+u;
+      if(!/^https?:\/\/\S+$/i.test(u)){bad++;return}
+      list.push({title:t,url:u});
+    });
+    c.planLinks[w.dataset.day]=list;
+  });
   savePClients(arr);
-  alert("تم حفظ خطة التمارين ✓");
+  toast(bad?"اتحفظت الخطة، لكن "+bad+" لينك مش صحيح واتشال":"تم حفظ خطة التمارين ✓");
 }
 function saveClientNutrition(){
   if(!activePlanClientId)return;
@@ -1083,7 +1239,8 @@ function renderClientDashboard(c){
   var hasEx=false;
   WEEK_DAYS.forEach(function(day){
     var ex=normalizePlanText(c.plan&&c.plan[day]);
-    if(!ex)return;
+    var dayLinks=((c.planLinks&&c.planLinks[day])||[]).filter(function(l){return l&&/^https?:\/\//i.test(l.url||"")});
+    if(!ex&&!dayLinks.length)return;
     hasEx=true;
     var done=!!c.completions[day];
     var card=ce("div","day-card"+(done?" done":""));
@@ -1096,8 +1253,20 @@ function renderClientDashboard(c){
     card.appendChild(dh);
     var sec=ce("div","day-sec");
     sec.appendChild(ce("div","day-sec-label","التمارين"));
-    sec.appendChild(linkifyText(ex));
+    if(ex)sec.appendChild(linkifyText(ex));
     card.appendChild(sec);
+    if(dayLinks.length){
+      var vs=ce("div","day-sec");vs.appendChild(ce("div","day-sec-label","شوف التمرينة"));
+      var lb=ce("div","lk-btns");
+      dayLinks.forEach(function(l,n){
+        var a=ce("a","lk-btn");a.href=l.url;a.target="_blank";a.rel="noopener";
+        a.innerHTML='<span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>';
+        var t=ce("span","t");t.textContent=l.title||("تمرينة "+(n+1));a.appendChild(t);
+        var go=ce("small");go.textContent="مشاهدة ›";a.appendChild(go);
+        lb.appendChild(a);
+      });
+      vs.appendChild(lb);card.appendChild(vs);
+    }
     daysGrid.appendChild(card);
   });
   if(!hasEx)planCard.appendChild(ce("p","mute","مفيش خطة تمارين بعد"));
@@ -1149,13 +1318,16 @@ function showPrivateState(){
 
 function route(){
   menu(false);var h=(location.hash||"#home").slice(1);if(!document.getElementById(h))h="home";
-  ["home","muscle","cutting","rehab","kickbox","nutrition","exercises","admin","private","subs","allresults"].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle("on",id===h)});
-  document.querySelectorAll("nav a").forEach(function(a){a.classList.toggle("on",a.dataset.t===h)});
+  ["home","muscle","cutting","rehab","kickbox","nutrition","exercises","admin","private","subs","allresults","group","me","chat-kickbox","chat-champs"].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle("on",id===h)});
+  document.querySelectorAll("nav a").forEach(function(a){a.classList.toggle("on",a.dataset.t===(h.indexOf("chat-")===0?"group":h))});
   document.querySelectorAll(".tb-btn[data-t]").forEach(function(b){b.classList.toggle("on",b.dataset.t===h)});
   var fab=document.getElementById("fab-results");if(fab)fab.classList.toggle("hide",h==="allresults");
   closeNotifs();
+  document.body.classList.toggle("in-chat",h.indexOf("chat-")===0);
+  if(h.indexOf("chat-")===0)chatOpen(h.slice(5));else chatClose();
   if(h==="allresults")renderAllResults();
-  if(h==="admin")checkAdmin();if(h==="home")applyHome();if(h==="subs"){checkAdmin();drawSubs()}
+  if(h==="me")drawMe();
+  if(h==="admin"){checkAdmin();if(isAdmin)drawAdm()}if(h==="home")applyHome();if(h==="subs"){checkAdmin();drawSubs()}
   if(h==="private"){checkAdmin();showPrivateState()}
   if(SVCS.indexOf(h)>=0){switchTab(h,"offer");renderContent(h);renderVideos(h);if(isAdmin){var ta=document.getElementById("edit-"+h);if(ta)ta.value=getContent(h)}}
 }
@@ -1308,6 +1480,339 @@ function renderAllResults(){
   if(!n)list.appendChild(ce("p","mute","مفيش نتائج لسه"));
 }
 
+/* ===== group chat ===== */
+var CHAT_NAMES={kickbox:"كيك بوكس",champs:"الأبطال"};
+var chat={room:null,el:null,es:null,poll:null,msgs:{},pending:{},nodes:{},first:true,rec:null};
+var ICO_IMG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
+var ICO_MIC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>';
+var ICO_SEND='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>';
+function chatProfile(){try{var p=JSON.parse(lsGet("gym-chat-profile","null")||"null");return p&&p.name?p:null}catch(e){return null}}
+function chatUid(){var u=lsGet("gym-chat-uid","");if(!u){u=Math.random().toString(36).slice(2,10)+Date.now().toString(36);lsSet("gym-chat-uid",u)}return u}
+function chatUrl(room,query,key){var c=syncCfg();return c.url.replace(/\/+$/,"")+"/chats/"+encodeURIComponent(c.code)+"/"+room+(key?"/"+encodeURIComponent(key):"")+".json"+(query||"")}
+function chatQ(sel){return chat.el?chat.el.querySelector(sel):null}
+function chatR(name){return chatQ('[data-r="'+name+'"]')}
+function chatDot(st){var d=chatR("dot");if(d)d.className="ch-dot "+st}
+function chatErr(msg){var e=chatR("err");if(!e)return;e.textContent=msg||"";e.style.display=msg?"block":"none"}
+function chatHttpMsg(code){
+  if(code===401||code===403)return "الدردشة محتاجة صلاحية في Firebase: افتح Rules وضيف قسم chats (read/write: true) واضغط Publish.";
+  if(code===404)return "قاعدة البيانات مش موجودة على الرابط ده. راجع رابط المزامنة في الإدارة.";
+  return "مشكلة في الاتصال (HTTP "+code+")";
+}
+function chatOpen(room){
+  if(!CHAT_NAMES[room])return;
+  chatClose();
+  var el=document.getElementById("chat-"+room);if(!el)return;
+  chat.room=room;chat.el=el;chat.msgs={};chat.pending={};chat.nodes={};chat.first=true;
+  el.innerHTML='<div class="ch-head"><a class="ch-back" href="#group" aria-label="رجوع">&rsaquo;</a><h2></h2><span class="ch-dot" data-r="dot"></span></div>'+
+   '<div class="ch-err" data-r="err"></div>'+
+   '<div class="card" data-r="profile" style="display:none"><h3 style="margin:0 0 10px">اكتب بياناتك عشان تدخل</h3><label class="mute">الاسم</label><input data-r="name" maxlength="30" placeholder="اسمك" style="margin:6px 0 10px"><label class="mute">رقم الموبايل (اختياري)</label><input data-r="phone" maxlength="20" inputmode="tel" dir="ltr" placeholder="01xxxxxxxxx" style="margin:6px 0 12px"><button class="btn" type="button" data-act="enter" style="width:100%">دخول الدردشة</button></div>'+
+   '<div data-r="chatbox" style="display:none"><div data-r="adminbar" style="display:none;margin-bottom:10px"><button class="btn alt" type="button" data-act="clear" style="width:100%">مسح كل رسائل الجروب</button></div><div class="ch-list" data-r="list"></div></div>'+
+   '<div class="ch-composer" data-r="composer" style="display:none">'+
+     '<div class="ch-rec" data-r="rec"><span class="ch-rec-dot"></span><b data-r="rectime">0:00</b><button type="button" class="ch-ib" data-act="reccancel" aria-label="إلغاء">&#10005;</button><button type="button" class="ch-ib send" data-act="recsend" aria-label="إرسال">'+ICO_SEND+'</button></div>'+
+     '<div class="ch-row" data-r="row"><button type="button" class="ch-ib" data-act="img" aria-label="صورة">'+ICO_IMG+'</button><input type="file" accept="image/*" data-r="file" hidden><textarea data-r="text" rows="1" placeholder="اكتب رسالة..."></textarea><button type="button" class="ch-ib" data-act="mic" data-r="micbtn" aria-label="رسالة صوتية">'+ICO_MIC+'</button><button type="button" class="ch-ib send" data-act="send" data-r="sendbtn" style="display:none" aria-label="إرسال">'+ICO_SEND+'</button></div>'+
+   '</div>';
+  el.querySelector("h2").textContent=CHAT_NAMES[room];
+  el.onclick=chatClick;
+  var tx=chatR("text");
+  tx.oninput=function(){tx.style.height="auto";tx.style.height=Math.min(tx.scrollHeight,110)+"px";var has=tx.value.trim().length>0;chatR("sendbtn").style.display=has?"flex":"none";chatR("micbtn").style.display=has?"none":"flex"};
+  tx.onkeydown=function(e){if(e.key==="Enter"&&!e.shiftKey&&window.innerWidth>700){e.preventDefault();chatSendText()}};
+  chatR("file").onchange=function(){var f=this.files&&this.files[0];this.value="";if(!f)return;toast("جاري تجهيز الصورة...");readFile(f).then(function(d){chatSend({k:"img",x:d})}).catch(function(e){toast(String(e))})};
+  if(!syncCfg().on){chatErr("المزامنة متوقفة. فعّلها من الإدارة عشان الدردشة تشتغل.");chatR("profile").style.display="none";return}
+  if(!chatProfile()){chatR("profile").style.display="block";return}
+  chatEnter();
+}
+function chatEnter(){
+  chatR("profile").style.display="none";chatR("chatbox").style.display="block";chatR("composer").style.display="block";
+  var ab=chatR("adminbar");if(ab)ab.style.display=isAdmin?"block":"none";
+  chatFetch();chatConnect();
+}
+function chatClose(){
+  try{if(chat.es)chat.es.close()}catch(e){}
+  chat.es=null;if(chat.poll){clearInterval(chat.poll);chat.poll=null}
+  try{chatRecStop(true)}catch(e){}
+  if(chat.el){chat.el.innerHTML=""}
+  chat.room=null;chat.el=null;chat.nodes={};chat.msgs={};chat.pending={};
+}
+function chatFetch(){
+  var room=chat.room;if(!room)return;
+  fetch(chatUrl(room,"?orderBy=%22%24key%22&limitToLast=60")).then(function(r){if(!r.ok){var e=new Error("HTTP");e.code=r.status;throw e}return r.json()}).then(function(d){
+    if(chat.room!==room)return;chatErr("");chatDot("on");
+    chat.msgs=d&&typeof d==="object"?d:{};chatRender();
+  }).catch(function(e){if(chat.room!==room)return;chatDot("off");chatErr(e&&e.code?chatHttpMsg(e.code):"مفيش اتصال بقاعدة البيانات. اتأكد من النت وإن الملف مفتوح من سفاري أو من موقع مرفوع.")});
+}
+function chatConnect(){
+  var room=chat.room;if(!room)return;
+  function startPoll(){if(!chat.poll)chat.poll=setInterval(chatFetch,4000)}
+  try{
+    var es=new EventSource(chatUrl(room,"?orderBy=%22%24key%22&limitToLast=60"));chat.es=es;
+    es.addEventListener("put",function(e){chatEvent(e.data,false)});
+    es.addEventListener("patch",function(e){chatEvent(e.data,true)});
+    es.onopen=function(){if(chat.poll){clearInterval(chat.poll);chat.poll=null}chatDot("on")};
+    es.onerror=function(){chatDot("off");startPoll()};
+  }catch(e){startPoll()}
+}
+function chatEvent(data,isPatch){
+  var d;try{d=JSON.parse(data)}catch(e){return}
+  if(!d)return;var path=d.path||"/",val=d.data;
+  if(path==="/"){
+    if(isPatch){if(val&&typeof val==="object")for(var k in val){if(val[k]===null)delete chat.msgs[k];else chat.msgs[k]=val[k]}}
+    else chat.msgs=(val&&typeof val==="object")?val:{};
+  }else{
+    var parts=path.split("/").filter(Boolean);
+    if(parts.length===1){if(val===null)delete chat.msgs[parts[0]];else chat.msgs[parts[0]]=val}
+  }
+  chatErr("");chatRender();
+}
+function chatOk(m){return m&&typeof m==="object"&&(m.k==="text"||m.k==="img"||m.k==="voice")&&typeof m.x==="string"}
+function chatColor(name){var h=0;for(var i=0;i<name.length;i++)h=(h*31+name.charCodeAt(i))%360;return "hsl("+h+",70%,65%)"}
+function chatTime(t){if(typeof t!=="number")return "";var d=new Date(t);return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)}
+function fmtSec(n){n=Math.max(0,Math.round(n));return Math.floor(n/60)+":"+("0"+(n%60)).slice(-2)}
+function chatNode(key,m,pend){
+  var pr=chatProfile(),own=!!(pr&&m.u===pr.uid);
+  var d=ce("div","ch-msg"+(own?" own":"")+(pend?" pend":""));
+  if(!own){var nm=ce("span","nm");nm.style.color=chatColor(String(m.n||""));nm.textContent=String(m.n||"مجهول").slice(0,30);if(m.p){var ph=ce("small");ph.textContent=String(m.p).slice(0,20);nm.appendChild(ph)}d.appendChild(nm)}
+  if(m.k==="text"){var p=ce("p");p.textContent=String(m.x).slice(0,2000);d.appendChild(p)}
+  else if(m.k==="img"){if(/^data:image\//.test(m.x)){var im=document.createElement("img");im.src=m.x;im.loading="lazy";im.onclick=function(){var lb=document.getElementById("lb");lb.querySelector("img").src=m.x;lb.classList.add("on")};d.appendChild(im)}}
+  else if(m.k==="voice"){if(/^data:audio\//.test(m.x)){var a=document.createElement("audio");a.controls=true;a.preload="metadata";a.src=m.x;d.appendChild(a)}}
+  var t=ce("span","tm2");t.textContent=(m.k==="voice"&&m.d?"🎤 "+fmtSec(m.d)+"  ":"")+chatTime(m.t);d.appendChild(t);
+  if(isAdmin&&!pend&&key){var x=ce("button","cx","حذف");x.type="button";tapConfirm(x,function(){chatDelete(key)});d.appendChild(x)}
+  return d;
+}
+function chatRender(){
+  var list=chatR("list");if(!list)return;
+  var nb=(document.documentElement.scrollHeight-window.scrollY-window.innerHeight)<160,hadNew=false;
+  var keys=Object.keys(chat.msgs).filter(function(k){return chatOk(chat.msgs[k])}).sort();
+  // drop pending that were delivered
+  var delivered={};keys.forEach(function(k){var c=chat.msgs[k].c;if(c)delivered[c]=1});
+  Object.keys(chat.pending).forEach(function(c){if(delivered[c]&&!chat.pending[c].fail){delete chat.pending[c]}});
+  // remove nodes no longer present
+  Object.keys(chat.nodes).forEach(function(k){
+    var isP=k.indexOf("p:")===0,gone=isP?!chat.pending[k.slice(2)]||chat.pending[k.slice(2)].rendered!==chat.nodes[k].dataset.v:!chat.msgs[k]||!chatOk(chat.msgs[k]);
+    if(gone){if(chat.nodes[k].parentNode)chat.nodes[k].parentNode.removeChild(chat.nodes[k]);delete chat.nodes[k]}
+  });
+  // add new real nodes in order
+  keys.forEach(function(k,i){
+    if(chat.nodes[k])return;
+    var n=chatNode(k,chat.msgs[k],false);chat.nodes[k]=n;hadNew=true;
+    var before=null;for(var j=i+1;j<keys.length;j++){if(chat.nodes[keys[j]]){before=chat.nodes[keys[j]];break}}
+    if(!before){var firstPend=list.querySelector(".ch-msg[data-p]");before=firstPend}
+    list.insertBefore(n,before||null);
+  });
+  // pending (sending / failed)
+  Object.keys(chat.pending).forEach(function(c){
+    var pm=chat.pending[c];if(chat.nodes["p:"+c])return;
+    var n=chatNode(null,pm,true);n.setAttribute("data-p","1");n.dataset.v=pm.rendered=String(Date.now())+c;
+    if(pm.fail){n.classList.remove("pend");n.classList.add("fail");var r=ce("span","tm2","⚠ فشل الإرسال — اضغط لإعادة المحاولة");n.appendChild(r);n.onclick=function(){delete chat.pending[c];chatRender();chatSend(pm.msg)}}
+    chat.nodes["p:"+c]=n;list.appendChild(n);hadNew=true;
+  });
+  if(hadNew&&(nb||chat.first)){setTimeout(function(){window.scrollTo(0,document.documentElement.scrollHeight)},30)}
+  if(keys.length)chat.first=false;
+}
+function chatSendText(){
+  var tx=chatR("text");if(!tx)return;var t=tx.value.trim();if(!t)return;
+  tx.value="";tx.oninput();chatSend({k:"text",x:t.slice(0,1000)});
+}
+function chatSend(msg){
+  var pr=chatProfile(),room=chat.room;if(!pr||!room)return;
+  var cid=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+  var body={n:pr.name,p:pr.phone||"",u:pr.uid,k:msg.k,x:msg.x,c:cid,t:{".sv":"timestamp"}};if(msg.d)body.d=msg.d;
+  var local={n:body.n,p:body.p,u:body.u,k:body.k,x:body.x,c:cid,t:Date.now(),msg:msg};if(msg.d)local.d=msg.d;
+  chat.pending[cid]=local;chat.first=true;chatRender();
+  fetch(chatUrl(room),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){if(!r.ok){var e=new Error("HTTP");e.code=r.status;throw e}return r.json()}).then(function(j){
+    if(chat.room!==room)return;
+    delete chat.pending[cid];
+    if(j&&j.name&&!chat.msgs[j.name]){var m2={n:body.n,p:body.p,u:body.u,k:body.k,x:body.x,c:cid,t:Date.now()};if(msg.d)m2.d=msg.d;chat.msgs[j.name]=m2}
+    chatErr("");chatRender();
+  }).catch(function(e){
+    if(chat.room!==room)return;
+    local.fail=true;var old=chat.nodes["p:"+cid];if(old&&old.parentNode)old.parentNode.removeChild(old);delete chat.nodes["p:"+cid];
+    chatErr(e&&e.code?chatHttpMsg(e.code):"فشل الإرسال. اتأكد من النت.");chatRender();
+  });
+}
+function chatDelete(key){
+  var room=chat.room;if(!room||!isAdmin)return;
+  fetch(chatUrl(room,"",key),{method:"DELETE"}).then(function(r){if(!r.ok)throw 0;delete chat.msgs[key];chatRender();toast("تم حذف الرسالة")}).catch(function(){toast("فشل الحذف")});
+}
+function chatClick(e){
+  var b=e.target.closest?e.target.closest("[data-act]"):null;if(!b)return;
+  var act=b.getAttribute("data-act");
+  if(act==="enter"){
+    var nm=chatR("name").value.trim(),ph=chatR("phone").value.trim();
+    if(!nm){toast("اكتب اسمك الأول");return}
+    lsSet("gym-chat-profile",JSON.stringify({name:nm.slice(0,30),phone:ph.slice(0,20),uid:chatUid()}));chatEnter();
+  }
+  else if(act==="send")chatSendText();
+  else if(act==="img")chatR("file").click();
+  else if(act==="mic")chatRecStart();
+  else if(act==="reccancel")chatRecStop(true);
+  else if(act==="recsend")chatRecStop(false);
+  else if(act==="clear"){
+    if(b.dataset.arm!=="1"){b.dataset.arm="1";b.textContent="اضغط تاني لمسح كل الرسائل";setTimeout(function(){if(b.isConnected){b.dataset.arm="";b.textContent="مسح كل رسائل الجروب"}},3000);return}
+    var room=chat.room;fetch(chatUrl(room),{method:"DELETE"}).then(function(r){if(!r.ok)throw 0;chat.msgs={};chatRender();toast("تم مسح الرسائل")}).catch(function(){toast("فشل المسح")});
+  }
+}
+/* voice messages */
+function chatRecStart(){
+  if(chat.rec)return;
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder){toast("التسجيل الصوتي مش مدعوم هنا. افتح التطبيق من سفاري أو كروم عن طريق رابط https");return}
+  navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream){
+    var mime="";["audio/mp4","audio/webm;codecs=opus","audio/webm","audio/ogg"].some(function(t){try{if(MediaRecorder.isTypeSupported(t)){mime=t;return true}}catch(e){}return false});
+    var opts={audioBitsPerSecond:24000};if(mime)opts.mimeType=mime;
+    var mr;try{mr=new MediaRecorder(stream,opts)}catch(e){mr=new MediaRecorder(stream)}
+    var r={mr:mr,stream:stream,chunks:[],start:Date.now(),cancel:false,timer:null,mime:mime};chat.rec=r;
+    mr.ondataavailable=function(ev){if(ev.data&&ev.data.size)r.chunks.push(ev.data)};
+    mr.onstop=function(){
+      stream.getTracks().forEach(function(t){t.stop()});clearInterval(r.timer);
+      var secs=(Date.now()-r.start)/1000;chat.rec=null;
+      if(chat.el&&chatR("rec")){chatR("rec").style.display="none";chatR("row").style.display="flex"}
+      if(r.cancel||secs<0.8||!r.chunks.length){if(!r.cancel&&secs<0.8)toast("التسجيل قصير");return}
+      var blob=new Blob(r.chunks,{type:(mr.mimeType||mime||"audio/webm")});
+      if(blob.size>900000){toast("التسجيل طويل، سجّل رسالة أقصر");return}
+      var fr=new FileReader();fr.onload=function(){chatSend({k:"voice",x:fr.result,d:Math.round(secs)})};fr.readAsDataURL(blob);
+    };
+    mr.start();
+    chatR("row").style.display="none";chatR("rec").style.display="flex";chatR("rectime").textContent="0:00";
+    r.timer=setInterval(function(){var s2=(Date.now()-r.start)/1000;var el=chatR("rectime");if(el)el.textContent=fmtSec(s2);if(s2>=120)chatRecStop(false)},250);
+  }).catch(function(){toast("لازم تسمح باستخدام الميكروفون")});
+}
+function chatRecStop(cancel){
+  var r=chat.rec;if(!r)return;r.cancel=!!cancel;
+  try{if(r.mr.state!=="inactive")r.mr.stop();else{r.stream.getTracks().forEach(function(t){t.stop()});chat.rec=null}}catch(e){chat.rec=null}
+}
+
+/* ===== members: expired bar, codes, member page, shared weekly plan ===== */
+function genMemberCode(){var used={};M.forEach(function(m){if(m.pw)used[String(m.pw)]=1});var c;do{c=String(Math.floor(10000+Math.random()*90000))}while(used[c]);return c}
+function drawExpBar(){
+  var bar=document.getElementById("exp-bar");if(!bar)return;
+  if(!isAdmin){bar.style.display="none";return}
+  var now=Date.now(),ex=M.filter(function(m){return m.end<=now});
+  if(!ex.length){bar.style.display="none";return}
+  bar.innerHTML="";bar.appendChild(ce("b","","⚠ اشتراكات منتهية ("+ex.length+")"));
+  ex.slice(0,10).forEach(function(m){
+    var c=ce("button","exp-chip",m.name+" · "+fmt(m.end));c.type="button";
+    c.onclick=function(){var cur=document.querySelector(".adm-panel.on");if(!cur||cur.id!=="adm-members")admTab("members");var t=document.getElementById("tb");if(t)t.scrollIntoView({behavior:"smooth",block:"center"})};
+    bar.appendChild(c);
+  });
+  if(ex.length>10)bar.appendChild(ce("span","","و "+(ex.length-10)+" كمان"));
+  bar.style.display="block";
+}
+function editMemberCode(cell,m){
+  cell.innerHTML="";var w=ce("div","mem-edit");
+  var inp=document.createElement("input");inp.value=m.pw||genMemberCode();inp.inputMode="numeric";inp.dir="ltr";
+  var ok=ce("button","mini","حفظ");ok.type="button";
+  var no=ce("button","del","إلغاء");no.type="button";
+  ok.onclick=function(){
+    var v=inp.value.trim();
+    if(v.length<3||/\s/.test(v)){toast("الكود لازم يكون ٣ حروف أو أرقام على الأقل من غير مسافات");return}
+    if(M.some(function(o){return o!==m&&String(o.pw)===v})){toast("الكود ده مستخدم عند مشترك تاني");return}
+    m.pw=v;save();drawAdm();drawSubs();toast("تم حفظ الكود");
+  };
+  no.onclick=function(){drawAdm();drawSubs()};
+  w.appendChild(inp);w.appendChild(ok);w.appendChild(no);cell.appendChild(w);
+}
+function loadMPlan(){try{var o=JSON.parse(lsGet("gym-members-plan","{}")||"{}");return{plan:(o&&o.plan)||{},links:(o&&o.links)||{}}}catch(e){return{plan:{},links:{}}}}
+function lkBuild(day,links){
+  var lkw=ce("div","lk-wrap");lkw.dataset.day=day;
+  var add=ce("button","lk-add");add.type="button";
+  add.innerHTML='<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.3 5 12 5 12 5s-6.3 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2C2 8.76 2 12 2 12s0 3.24.4 4.8a2.5 2.5 0 0 0 1.76 1.77C5.7 19 12 19 12 19s6.3 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77C22 15.24 22 12 22 12s0-3.24-.4-4.8zM10 15V9l5.2 3z"/></svg><span>إضافة لينك يوتيوب للتمرينة</span>';
+  var rows=ce("div","lk-rows");
+  function row(t,u){
+    var r=ce("div","lk-row");
+    var i1=document.createElement("input");i1.placeholder="اسم التمرينة (مثال: سكوات)";i1.value=t||"";i1.dataset.f="t";i1.maxLength=60;
+    var i2=document.createElement("input");i2.placeholder="https://youtube.com/...";i2.value=u||"";i2.dataset.f="u";i2.dir="ltr";i2.inputMode="url";
+    var x=ce("button","lk-x","✕");x.type="button";x.onclick=function(){r.remove()};
+    r.appendChild(i1);r.appendChild(i2);r.appendChild(x);rows.appendChild(r);
+  }
+  add.onclick=function(){row("","")};
+  (links||[]).forEach(function(l){row(l.title,l.url)});
+  lkw.appendChild(add);lkw.appendChild(rows);return lkw;
+}
+function lkRead(w){
+  var list=[],bad=0;
+  w.querySelectorAll(".lk-row").forEach(function(r){
+    var t=r.querySelector('[data-f="t"]').value.trim(),u=r.querySelector('[data-f="u"]').value.trim();
+    if(!u&&!t)return;
+    if(u&&!/^https?:\/\//i.test(u)&&/^[\w.-]+\.[a-z]{2,}/i.test(u))u="https://"+u;
+    if(!/^https?:\/\/\S+$/i.test(u)){bad++;return}
+    list.push({title:t,url:u});
+  });
+  return{list:list,bad:bad};
+}
+function drawMPlanEditor(){
+  var box=document.getElementById("mplan-days");if(!box)return;box.innerHTML="";
+  var d=loadMPlan();
+  WEEK_DAYS.forEach(function(day){
+    var blk=ce("div","admin-day-block");blk.appendChild(ce("h4","",day));
+    blk.appendChild(lkBuild(day,d.links[day]));
+    var lab=ce("label","mute","التمارين");lab.style.cssText="display:block;margin-bottom:4px";blk.appendChild(lab);
+    var ta=document.createElement("textarea");ta.rows=2;ta.dataset.day=day;ta.placeholder="مثال: سكوات ٣×١٢ — ضغط بنش ٣×١٠ — بلانك ٣٠ث";ta.value=d.plan[day]||"";
+    ta.style.cssText="width:100%;padding:10px;border-radius:8px;background:var(--card);color:var(--ink);border:1.5px solid var(--line);font:inherit";
+    blk.appendChild(ta);box.appendChild(blk);
+  });
+}
+function saveMPlan(){
+  if(!isAdmin)return;
+  var o={plan:{},links:{}},bad=0;
+  document.querySelectorAll("#mplan-days textarea").forEach(function(ta){o.plan[ta.dataset.day]=ta.value.trim()});
+  document.querySelectorAll("#mplan-days .lk-wrap").forEach(function(w){var r=lkRead(w);bad+=r.bad;o.links[w.dataset.day]=r.list});
+  if(!lsSet("gym-members-plan",JSON.stringify(o))){toast("مقدرتش أحفظ، المساحة ممتلية");return}
+  toast(bad?"اتحفظت، لكن "+bad+" لينك مش صحيح واتشال":"تم حفظ تمرينة الأسبوع ✓");
+}
+function memList(){try{var a=JSON.parse(lsGet("gym-members","[]")||"[]");return Array.isArray(a)?a:[]}catch(e){return[]}}
+function memByCode(c){c=String(c||"").trim();if(!c)return null;return memList().find(function(m){return m.pw&&String(m.pw)===c})||null}
+function meLogin(){
+  var v=document.getElementById("me-code").value.trim(),m=memByCode(v),er=document.getElementById("me-err");
+  if(!m){er.style.display="block";return}
+  er.style.display="none";lsSet("gym-me-code",v);document.getElementById("me-code").value="";drawMe();
+}
+function meLogout(){lsSet("gym-me-code","");drawMe()}
+function drawMe(){
+  var login=document.getElementById("me-login"),dash=document.getElementById("me-dash");if(!login||!dash)return;
+  var m=memByCode(lsGet("gym-me-code",""));
+  if(!m){login.style.display="block";dash.style.display="none";dash.innerHTML="";return}
+  login.style.display="none";dash.style.display="block";dash.innerHTML="";
+  var now=Date.now(),ok=m.end>now,left=Math.max(0,Math.ceil((m.end-now)/86400000));
+  var head=ce("div","card");head.style.marginBottom="16px";
+  var hr=ce("div");hr.style.cssText="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px";
+  hr.appendChild(ce("h2","",m.name));hr.lastChild.style.margin="0";
+  hr.appendChild(ce("span","tag "+(ok?"ok":"bad"),ok?"اشتراك ساري":"اشتراك منتهي"));head.appendChild(hr);
+  if(ok){
+    var big=ce("div");big.style.cssText="display:flex;align-items:baseline;gap:8px";
+    big.appendChild(ce("span","me-days",String(left)));big.appendChild(ce("span","mute","يوم متبقي في اشتراكك"));head.appendChild(big);
+  }else{
+    var w=ce("p","","اشتراكك انتهى. كلّم الكابتن عشان تجدد وتشوف تمرينة الأسبوع.");w.style.cssText="color:var(--bad);margin:0";head.appendChild(w);
+  }
+  var meta=ce("p","mute",(m.start?"بدأ في: "+fmt(m.start)+"  ·  ":"")+(ok?"ينتهي في: ":"انتهى في: ")+fmt(m.end));meta.style.margin="10px 0 0";head.appendChild(meta);
+  dash.appendChild(head);
+  if(ok){
+    var pc=ce("div","card");pc.appendChild(ce("h3","","تمرينة الأسبوع"));pc.lastChild.style.marginTop="0";
+    var d=loadMPlan(),grid=ce("div","days-grid"),any=false,todayIdx=(new Date().getDay()+1)%7;
+    WEEK_DAYS.forEach(function(day,idx){
+      var ex=normalizePlanText(d.plan[day]),ls=(d.links[day]||[]).filter(function(l){return l&&/^https?:\/\//i.test(l.url||"")});
+      if(!ex&&!ls.length)return;any=true;
+      var card=ce("div","day-card"+(idx===todayIdx?" today":""));
+      var dh=ce("div","day-head"),nm=ce("div","day-name",day);
+      if(idx===todayIdx)nm.appendChild(ce("span","today-tag","النهاردة"));
+      dh.appendChild(nm);card.appendChild(dh);
+      if(ex){var sec=ce("div","day-sec");sec.appendChild(ce("div","day-sec-label","التمارين"));sec.appendChild(linkifyText(ex));card.appendChild(sec)}
+      if(ls.length){
+        var vs=ce("div","day-sec");vs.appendChild(ce("div","day-sec-label","شوف التمرينة"));var lb=ce("div","lk-btns");
+        ls.forEach(function(l,n){
+          var a=ce("a","lk-btn");a.href=l.url;a.target="_blank";a.rel="noopener";
+          a.innerHTML='<span class="pl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>';
+          var t=ce("span","t");t.textContent=l.title||("تمرينة "+(n+1));a.appendChild(t);
+          var go=ce("small");go.textContent="مشاهدة ›";a.appendChild(go);lb.appendChild(a);
+        });
+        vs.appendChild(lb);card.appendChild(vs);
+      }
+      grid.appendChild(card);
+    });
+    if(any)pc.appendChild(grid);else pc.appendChild(ce("p","mute","الكابتن لسه مضافش تمرينة الأسبوع."));
+    dash.appendChild(pc);
+  }
+  var out=ce("button","btn alt","خروج");out.type="button";out.style.cssText="width:100%;margin-top:16px";out.onclick=meLogout;dash.appendChild(out);
+}
+
 function boot(){
   try{load();applyHome();SVCS.forEach(function(s){try{renderContent(s)}catch(e){}try{renderVideos(s)}catch(e){}});try{drawEx()}catch(e){}try{drawAdm()}catch(e){}try{checkAdmin()}catch(e){}try{route()}catch(e){}}catch(e){}
   try{updateNotifBadge()}catch(e){}
@@ -1319,7 +1824,7 @@ function boot(){
 
 /* ===== Firebase sync (REST + live stream) ===== */
 var SYNC_DEF={url:"https://workshop-sync-ahmed-default-rtdb.europe-west1.firebasedatabase.app",code:"workshop-ahmed-2027"};
-var SYNC_RE=/^(gym-members|gym-home|gym-ex-videos|gym-pclients|gym-notifs|gym-content-[\w-]+|gym-results-[\w-]+|gym-videos-[\w-]+)$/;
+var SYNC_RE=/^(gym-members|gym-home|gym-ex-videos|gym-pclients|gym-members-plan|gym-notifs|gym-content-[\w-]+|gym-results-[\w-]+|gym-videos-[\w-]+)$/;
 var syncState={status:"idle",last:0,msg:"",es:null,timers:{},poll:null,busy:null};
 function syncCfg(){var c={};try{c=JSON.parse(lsGet("gym-sync-cfg","{}")||"{}")}catch(e){}if(c.v!==2){c={on:c.on}}var u=(c.url||SYNC_DEF.url).trim(),mo=u.match(/^https?:\/\/[^\/\s?#]+/i);if(mo)u=mo[0];return{url:u,code:(c.code||SYNC_DEF.code).trim(),on:c.on===false?false:true}}
 function syncBase(){var c=syncCfg();return c.url.replace(/\/+$/,"")+"/gyms/"+encodeURIComponent(c.code)}
@@ -1351,7 +1856,8 @@ function syncApplyRemote(k,node){
 }
 function syncRefresh(k){
   try{
-    if(k==="gym-members"){load();drawAdm();drawSubs()}
+    if(k==="gym-members"){load();drawAdm();drawSubs();try{if(document.getElementById("me").classList.contains("on"))drawMe()}catch(e){}}
+    else if(k==="gym-members-plan"){var mb2=document.getElementById("mplan-days");if(isAdmin&&mb2&&!mb2.contains(document.activeElement))drawMPlanEditor();try{if(document.getElementById("me").classList.contains("on"))drawMe()}catch(e){}}
     else if(k==="gym-home"){applyHome()}
     else if(k==="gym-ex-videos"){drawEx()}
     else if(k==="gym-pclients"){
