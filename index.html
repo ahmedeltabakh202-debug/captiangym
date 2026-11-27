@@ -47,7 +47,9 @@ th,td{text-align:start;padding:10px 8px;border-bottom:1px solid var(--line)}
 .tag{padding:2px 10px;border-radius:99px;font-size:.8rem;font-weight:600;border:1.5px solid}
 .tag.ok{color:var(--ok)}.tag.bad{color:var(--bad)}
 .del{background:none;border:0;color:var(--bad);cursor:pointer;font:inherit}
-.adm-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}
+.adm-tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-bottom:14px}
+.adm-tab{padding:10px 2px;font-size:.74rem}
+.adm-tab svg{width:22px;height:22px}
 .adm-tab span{white-space:nowrap}
 
 .adm-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:78px;padding:8px 4px;border-radius:14px;border:1.5px solid var(--line);background:linear-gradient(160deg,#222 0%,#141414 100%);color:var(--ink);font:inherit;font-weight:700;font-size:.78rem;cursor:pointer;transition:.15s}
@@ -147,8 +149,8 @@ body.menu .overlay{opacity:1;visibility:visible}
 .vid-frame{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#000}
 .vid-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .vid-card video{width:100%;aspect-ratio:16/9;border-radius:10px;background:#000;display:block}
-.np-ov{position:fixed;inset:0 0 calc(70px + env(safe-area-inset-bottom,0px)) 0;z-index:13;display:none}
-.np-box{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(78px + env(safe-area-inset-bottom,0px));z-index:14;width:min(94vw,420px);max-height:min(60vh,460px);overflow-y:auto;background:#121212;border:1.5px solid var(--line);border-top:4px solid var(--acc);border-radius:18px;padding:14px;box-shadow:0 10px 32px rgba(0,0,0,.7);display:none}
+.np-ov{position:fixed;inset:0;z-index:13;display:none}
+.np-box{position:fixed;top:calc(66px + env(safe-area-inset-top,0px));left:12px;width:min(92vw,380px);max-height:min(72vh,540px);overflow-y:auto;z-index:14;background:#121212;border:1.5px solid var(--line);border-top:4px solid var(--acc);border-radius:18px;padding:14px;box-shadow:0 10px 32px rgba(0,0,0,.7);display:none}
 body.np .np-ov,body.np .np-box{display:block}
 body.np #tb-home.on{background:transparent;color:var(--ink)}body.np #tb-home.on svg{color:var(--acc)}
 #toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom,0px));z-index:40;background:var(--acc);color:#000;font-weight:800;padding:10px 18px;border-radius:99px;opacity:0;pointer-events:none;transition:.2s;max-width:90vw;text-align:center}
@@ -157,34 +159,74 @@ body.np #tb-home.on{background:transparent;color:var(--ink)}body.np #tb-home.on 
 .np-x{border:0;background:transparent;color:var(--ink);font-size:1.1rem;padding:4px 8px;cursor:pointer}
 .np-box .notif-item{margin-bottom:10px;padding:10px 12px}
 
-.grp-cards{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
-.grp-card{display:flex;flex-direction:column;align-items:center;gap:8px;padding:26px 12px;background:var(--card);border:1.5px solid var(--line);border-top:4px solid var(--acc);border-radius:20px;text-decoration:none;color:var(--ink);text-align:center}
-.grp-card svg{width:46px;height:46px;color:var(--acc)}.grp-card b{font-size:1.2rem}.grp-card small{color:var(--mute)}
-.ch-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.ch-head h2{margin:0;flex:1;font-size:1.6rem}
-.ch-back{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:12px;border:1.5px solid var(--line);color:var(--acc);text-decoration:none;font-size:1.6rem;line-height:1}
-.ch-dot{width:11px;height:11px;border-radius:50%;background:#777}.ch-dot.on{background:var(--ok)}.ch-dot.off{background:#e11d2e}
+.top-bell{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));left:12px;z-index:12;width:46px;height:46px;border-radius:50%;background:rgba(0,0,0,.72);border:1.5px solid var(--acc);color:var(--acc);display:flex;align-items:center;justify-content:center;cursor:pointer;backdrop-filter:blur(6px);padding:0}
+.top-bell svg{width:22px;height:22px}
+.top-bell .tb-badge{left:auto;right:-5px;top:-5px}
+.top-bell.on{background:var(--acc);color:#000}
+body.in-chat .top-bell{display:none}
+.np-perm{display:none;margin-bottom:10px;padding:10px 12px;border-radius:12px;background:rgba(255,212,0,.08);border:1px dashed var(--acc);font-size:.88rem}
+.np-perm button{margin-top:6px}
+.grp-list{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.grp-row{display:flex;align-items:center;gap:12px;padding:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;text-decoration:none;color:var(--ink)}
+.grp-av{flex:none;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#000}
+.grp-av svg{width:28px;height:28px}
+.grp-av.g1{background:linear-gradient(135deg,#ffd400,#ff9f1c)}.grp-av.g2{background:linear-gradient(135deg,#5ad08a,#2aa6a0)}
+.grp-mid{flex:1;min-width:0}.grp-nm{display:flex;align-items:center;gap:8px}.grp-nm b{font-size:1.1rem}
+.grp-pv{color:var(--mute);font-size:.85rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.grp-tm{flex:none;color:var(--mute);font-size:.72rem}
+.tb-badge.inl{position:static;display:none;line-height:20px;animation:none;border:0}
+.ch-top{position:sticky;top:0;z-index:6;display:flex;align-items:center;gap:10px;padding:10px 4px;margin:-6px -4px 8px;background:var(--bg);border-bottom:1px solid var(--line)}
+.ch-back{flex:none;display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:12px;border:1.5px solid var(--line);color:var(--acc);text-decoration:none;font-size:1.6rem;line-height:1}
+.ch-av{flex:none;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#ffd400,#ff9f1c);color:#000;font-weight:900;display:flex;align-items:center;justify-content:center}
+.ch-ti{flex:1;min-width:0}.ch-ti b{display:block;font-size:1.05rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ch-ti small{color:var(--mute);font-size:.75rem}
+.ch-dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:#777;margin-inline-end:5px}.ch-dot.on{background:var(--ok)}.ch-dot.off{background:#e11d2e}
+.ch-calls{display:flex;gap:8px}.ch-calls .ch-ib{width:40px;height:40px}
 .ch-err{background:#2a1512;border:1px solid var(--bad);color:var(--bad);border-radius:12px;padding:10px 12px;margin-bottom:12px;font-size:.9rem;display:none}
-.ch-list{direction:ltr;display:flex;flex-direction:column;gap:8px;padding-bottom:96px}
-.ch-msg{direction:rtl;max-width:82%;padding:8px 10px;border-radius:14px;background:var(--card);border:1px solid var(--line);align-self:flex-start;word-break:break-word}
-.ch-msg.own{align-self:flex-end;background:var(--acc);color:#000;border-color:var(--acc)}
-.ch-msg .nm{font-size:.8rem;font-weight:800;display:block;margin-bottom:2px}
-.ch-msg .nm small{font-weight:400;opacity:.7;margin-inline-start:6px;direction:ltr;display:inline-block}
-.ch-msg p{margin:0;white-space:pre-wrap}
-.ch-msg .tm2{display:block;font-size:.68rem;opacity:.65;margin-top:3px;text-align:end}
-.ch-msg img{max-width:100%;max-height:320px;border-radius:10px;display:block;cursor:pointer}
-.ch-msg audio{width:230px;max-width:100%;height:40px}
-.ch-msg.pend{opacity:.6}.ch-msg.fail{border-color:#e11d2e;cursor:pointer}
-.ch-msg .cx{margin-top:6px;border:0;border-radius:8px;background:rgba(0,0,0,.25);color:inherit;font:inherit;font-size:.75rem;padding:3px 10px;cursor:pointer}
+.ch-list{direction:ltr;display:flex;flex-direction:column;padding:6px 2px 100px}
+.ch-day{align-self:center;margin:12px 0 4px}.ch-day span{background:#222;color:var(--mute);border-radius:99px;padding:3px 12px;font-size:.75rem}
+.ch-line{display:flex;align-items:flex-end;gap:6px;margin-top:8px;max-width:88%;align-self:flex-start}
+.ch-line.cont{margin-top:2px}.ch-line.own{align-self:flex-end}
+.ch-line .av{flex:none;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;color:#000}
+.ch-line.cont .av{visibility:hidden}.ch-line.own .av{display:none}
+.bub{direction:rtl;text-align:right;padding:7px 10px 4px;border-radius:16px 16px 16px 4px;background:#1f1f1f;border:1px solid #2b2b2b;min-width:64px;word-break:break-word}
+.ch-line.own .bub{background:var(--acc);color:#000;border-color:var(--acc);border-radius:16px 16px 4px 16px}
+.bub .nm{display:block;font-size:.78rem;font-weight:800;margin-bottom:1px}
+.bub .nm small{font-weight:400;opacity:.7;margin-inline-start:6px;direction:ltr;display:inline-block}
+.ch-line.cont .nm{display:none}
+.bub p{margin:0;white-space:pre-wrap;line-height:1.55}
+.bub .mt{display:flex;justify-content:flex-end;gap:5px;font-size:.66rem;opacity:.7;margin-top:2px;direction:ltr}
+.bub img.pic{display:block;max-width:240px;width:100%;border-radius:10px;cursor:pointer;margin-bottom:2px}
+.ch-line.pend .bub{opacity:.6}.ch-line.fail .bub{border-color:#e11d2e;cursor:pointer}
+.bub .cx{margin-top:6px;border:0;border-radius:8px;background:rgba(0,0,0,.25);color:inherit;font:inherit;font-size:.72rem;padding:2px 10px;cursor:pointer}
+.vp{display:flex;align-items:center;gap:8px;min-width:190px;direction:ltr}
+.vp-btn{flex:none;width:34px;height:34px;border-radius:50%;border:0;background:rgba(0,0,0,.28);color:inherit;cursor:pointer;font-size:.75rem}
+.ch-line:not(.own) .vp-btn{background:var(--acc);color:#000}
+.vp-bar{flex:1;height:5px;border-radius:3px;background:rgba(127,127,127,.35);overflow:hidden;cursor:pointer}
+.vp-bar i{display:block;height:100%;width:0;background:currentColor}
+.vp-tm{font-size:.72rem;opacity:.85;min-width:34px}
 .ch-composer{position:fixed;left:0;right:0;bottom:calc(68px + env(safe-area-inset-bottom,0px));z-index:11;background:#0f0f0f;border-top:1px solid var(--line);padding:8px 10px}
 .ch-row{display:flex;gap:6px;align-items:flex-end;direction:rtl}
-.ch-row textarea{flex:1;max-height:110px;resize:none;margin:0;min-height:44px}
+.ch-row textarea{flex:1;max-height:110px;resize:none;margin:0;min-height:44px;border-radius:22px;padding:11px 14px}
 .ch-ib{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--card);color:var(--acc);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:1.1rem}
 .ch-ib svg{width:22px;height:22px}.ch-ib.send{background:var(--acc);color:#000}
 .ch-rec{display:none;align-items:center;gap:12px;direction:rtl;min-height:44px}
 .ch-rec b{flex:1;font-family:Anton,Impact,sans-serif;font-size:1.3rem;color:var(--bad);direction:ltr;text-align:start}
 .ch-rec-dot{width:12px;height:12px;border-radius:50%;background:#e11d2e;animation:npulse 1s infinite}
 body.in-chat .fab-results{display:none}
+.pc-btn{display:flex;align-items:center;gap:10px;width:100%;margin-bottom:16px;padding:14px;border-radius:16px;border:1.5px solid var(--acc);background:rgba(255,212,0,.08);color:var(--ink);font:inherit;font-weight:800;cursor:pointer}
+.pc-btn svg{width:24px;height:24px;color:var(--acc)}
+#call-ov{position:fixed;inset:0;z-index:80;background:#0a0a0a;display:none;flex-direction:column;align-items:center;justify-content:center}
+#call-ov.on{display:flex}
+#call-rv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none;background:#000}
+#call-lv{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));left:14px;width:96px;height:132px;object-fit:cover;border-radius:12px;border:2px solid var(--acc);display:none;background:#000;z-index:2;transform:scaleX(-1)}
+.call-center{position:relative;z-index:1;text-align:center;padding:0 20px}
+#call-ov.vid .call-center{position:absolute;top:calc(20px + env(safe-area-inset-top,0px));right:16px;text-align:right;padding:0}
+#call-ov.vid .call-av{display:none}
+.call-av{width:110px;height:110px;border-radius:50%;margin:0 auto 14px;background:linear-gradient(135deg,#ffd400,#ff9f1c);color:#000;font-size:2.6rem;font-weight:900;display:flex;align-items:center;justify-content:center}
+.call-center h2{margin:0 0 4px;text-shadow:0 1px 6px #000}.call-center p{margin:0;color:var(--mute);text-shadow:0 1px 6px #000}
+.call-btns{position:absolute;bottom:calc(36px + env(safe-area-inset-bottom,0px));left:0;right:0;display:flex;justify-content:center;gap:22px;z-index:2}
+.call-b{width:64px;height:64px;border-radius:50%;border:0;color:#fff;background:#333;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.call-b svg{width:28px;height:28px}.call-b.red{background:#e11d2e}.call-b.green{background:#1fb55f}.call-b.off{background:#fff;color:#000}
 #lb{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.92);display:none;align-items:center;justify-content:center;padding:12px}
 #lb.on{display:flex}#lb img{max-width:100%;max-height:100%;border-radius:8px}
 .lk-wrap{margin-bottom:10px}
@@ -216,8 +258,9 @@ body.in-chat .fab-results{display:none}
 <div class="install-bar" id="install-bar"><button type="button" class="install-btn" onclick="installApp()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 11l5 5 5-5M5 21h14"/></svg>تثبيت التطبيق</button></div>
 <div class="inst-ov" id="inst-ov" onclick="if(event.target===this)closeInst()"><div class="inst-box"><h3>تثبيت Captain Gym</h3><ol id="inst-steps"></ol><button type="button" class="btn" onclick="closeInst()">تمام</button></div></div>
 <a class="fab-results" id="fab-results" href="#allresults"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>النتائج</span></a>
+<button type="button" class="top-bell" id="tb-notifs" onclick="toggleNotifs()" aria-label="الإشعارات"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg><i class="tb-badge" id="notif-badge">0</i></button>
 <nav class="tabbar" id="tabbar" aria-label="التنقل">
-  <button type="button" class="tb-btn" id="tb-notifs" onclick="toggleNotifs()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>الإشعارات</span><i class="tb-badge" id="notif-badge">0</i></button>
+  <button type="button" class="tb-btn" id="tb-group" data-t="group" onclick="location.hash='#group'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>الجروب</span><i class="tb-badge" id="grp-badge">0</i></button>
   <button type="button" class="tb-btn" id="tb-home" data-t="home" onclick="goHome()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8M5 10v10h14V10M10 20v-6h4v6"/></svg><span>الرئيسية</span></button>
   <button type="button" class="tb-btn" id="bg" aria-label="القائمة" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>القائمة</span></button>
 </nav>
@@ -240,6 +283,7 @@ body.in-chat .fab-results{display:none}
 <div class="np-ov" id="np-ov" onclick="closeNotifs()"></div>
 <div class="np-box" id="np-box" role="dialog" aria-label="الإشعارات">
   <div class="np-head"><b>الإشعارات</b><button type="button" class="np-x" onclick="closeNotifs()" aria-label="إغلاق">✕</button></div>
+  <div class="np-perm" id="np-perm"></div>
   <div id="notif-admin" style="display:none;margin-bottom:12px">
     <textarea id="notif-text" rows="2" placeholder="اكتب إشعار جديد..."></textarea>
     <button class="btn" type="button" onclick="addNotif()" style="margin-top:8px;width:100%">نشر الإشعار</button>
@@ -510,15 +554,15 @@ body.in-chat .fab-results{display:none}
 </section>
 <section id="group">
   <h1 style="font-size:2.1rem">Group</h1>
-  <p class="mute">اختار الجروب اللي عايز تدخله وتدردش مع الكل</p>
-  <div class="grp-cards">
-    <a class="grp-card" href="#chat-kickbox"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 4 14h7l-1 8 10-13h-7z"/></svg><b>كيك بوكس</b><small>دردشة جماعية</small></a>
-    <a class="grp-card" href="#chat-champs"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0zM17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg><b>الأبطال</b><small>دردشة جماعية</small></a>
-  </div>
+  <p class="mute" style="margin:0 0 10px">اختار الجروب وادخل دردش مع الكل</p>
+  <div class="np-perm" id="grp-perm"></div>
+  <div class="grp-list" id="grp-list"></div>
 </section>
+<section id="chat-pc"></section>
 <section id="chat-kickbox"></section>
 <section id="chat-champs"></section>
 <div id="lb" onclick="this.classList.remove('on')"><img alt=""></div>
+<div id="call-ov"><video id="call-rv" autoplay playsinline></video><video id="call-lv" autoplay playsinline muted></video><div class="call-center"><div class="call-av" id="call-av">؟</div><h2 id="call-name"></h2><p id="call-st"></p></div><div class="call-btns" id="call-btns"></div></div>
 <section id="exercises">
   <h1 style="font-size:2.1rem">مكتبة التمارين</h1>
   <div class="chips" id="chips"></div>
@@ -547,6 +591,7 @@ body.in-chat .fab-results{display:none}
       <button type="button" class="adm-tab" data-adm="sections" onclick="admTab('sections')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>الأقسام</span></button>
       <button type="button" class="adm-tab" data-adm="sync" onclick="admTab('sync')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16M3 12a9 9 0 0 1 15.5-6.2L21 8M21 3v5h-5M3 21v-5h5"/></svg><span>المزامنة</span></button>
       <button type="button" class="adm-tab" data-adm="notifs" onclick="admTab('notifs')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9M13.7 21a2 2 0 0 1-3.4 0"/></svg><span>الإشعارات</span></button>
+      <button type="button" class="adm-tab" data-adm="groups" onclick="admTab('groups')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span>الجروب</span></button>
       <button type="button" class="adm-tab" id="save-file-btn" onclick="saveFile()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 19h16"/></svg><span>حفظ الملف</span></button>
     </div>
     <div class="adm-panel" id="adm-home">
@@ -599,6 +644,15 @@ body.in-chat .fab-results{display:none}
       <button class="btn" type="button" onclick="addNotif('adm')">إضافة الإشعار</button>
     </div>
     <div id="anotif-list"></div>
+    </div>
+    <div class="adm-panel" id="adm-groups">
+    <h2>الجروبات</h2>
+    <div class="card">
+      <p class="mute" style="margin-top:0">غيّر اسم كل جروب، والاسم الجديد بيظهر عند الكل.</p>
+      <label class="mute">الجروب الأول</label><input id="gname-kickbox" maxlength="30" style="margin:6px 0 12px">
+      <label class="mute">الجروب التاني</label><input id="gname-champs" maxlength="30" style="margin:6px 0 12px">
+      <button class="btn" type="button" onclick="saveGroupNames()" style="width:100%">حفظ الأسماء</button>
+    </div>
     </div>
     <div class="adm-panel" id="adm-sync">
     <h2>المزامنة</h2>
@@ -1091,7 +1145,10 @@ function drawPrivateClientsList(){
     var b1=ce("button","btn","خطة ومتابعة");b1.onclick=function(){openClientFollowup(c.id)};
     var b2=ce("button","btn alt","تعديل");b2.onclick=function(){editPrivateClient(c.id)};
     var b3=ce("button","btn alt","حذف");b3.style.borderColor="var(--bad)";b3.style.color="var(--bad)";b3.onclick=function(){deletePrivateClient(c.id)};
-    actions.appendChild(b1);actions.appendChild(b2);actions.appendChild(b3);card.appendChild(actions);box.appendChild(card)});
+    var b4=ce("button","btn","💬 محادثة");b4.type="button";b4.onclick=function(){location.hash="#chat-pc-"+c.id};
+    var bd4=ce("i","tb-badge inl");bd4.dataset.unread="pc-"+c.id;bd4.style.marginInlineStart="6px";b4.appendChild(bd4);
+    actions.appendChild(b4);actions.appendChild(b1);actions.appendChild(b2);actions.appendChild(b3);card.appendChild(actions);box.appendChild(card)});
+  try{chatUiRefresh()}catch(e){}
 }
 function searchClientByCode(){
   var code=(document.getElementById("client-code-search").value||"").trim(),err=document.getElementById("client-search-err"),dash=document.getElementById("client-dashboard");
@@ -1200,6 +1257,12 @@ function renderClientDashboard(c){
     head.appendChild(prog);
   }
   dash.appendChild(head);
+  if(!isAdmin)lsSet("gym-pc-auth",c.id);
+  var chb=ce("button","pc-btn");chb.type="button";
+  chb.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span style="flex:1;text-align:right">دردشة ومكالمة مع الكابتن</span>';
+  var chbd=ce("i","tb-badge inl");chbd.dataset.unread="pc-"+c.id;chb.appendChild(chbd);
+  chb.onclick=function(){location.hash="#chat-pc-"+c.id};
+  dash.appendChild(chb);try{chatUiRefresh()}catch(e){}
 
   // weights grid
   var wCard=ce("div","card");
@@ -1317,21 +1380,22 @@ function showPrivateState(){
 }
 
 function route(){
-  menu(false);var h=(location.hash||"#home").slice(1);if(!document.getElementById(h))h="home";
-  ["home","muscle","cutting","rehab","kickbox","nutrition","exercises","admin","private","subs","allresults","group","me","chat-kickbox","chat-champs"].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle("on",id===h)});
+  menu(false);var h=(location.hash||"#home").slice(1),base=h.indexOf("chat-pc-")===0?"chat-pc":h;if(!document.getElementById(base)){h="home";base="home"}
+  ["home","muscle","cutting","rehab","kickbox","nutrition","exercises","admin","private","subs","allresults","group","me","chat-pc","chat-kickbox","chat-champs"].forEach(function(id){var el=document.getElementById(id);if(el)el.classList.toggle("on",id===base)});
   document.querySelectorAll("nav a").forEach(function(a){a.classList.toggle("on",a.dataset.t===(h.indexOf("chat-")===0?"group":h))});
-  document.querySelectorAll(".tb-btn[data-t]").forEach(function(b){b.classList.toggle("on",b.dataset.t===h)});
+  document.querySelectorAll(".tb-btn[data-t]").forEach(function(b){b.classList.toggle("on",b.dataset.t===(h.indexOf("chat-")===0?"group":h))});
   var fab=document.getElementById("fab-results");if(fab)fab.classList.toggle("hide",h==="allresults");
   closeNotifs();
   document.body.classList.toggle("in-chat",h.indexOf("chat-")===0);
   if(h.indexOf("chat-")===0)chatOpen(h.slice(5));else chatClose();
   if(h==="allresults")renderAllResults();
+  if(h==="group")renderGroupList();
   if(h==="me")drawMe();
   if(h==="admin"){checkAdmin();if(isAdmin)drawAdm()}if(h==="home")applyHome();if(h==="subs"){checkAdmin();drawSubs()}
   if(h==="private"){checkAdmin();showPrivateState()}
   if(SVCS.indexOf(h)>=0){switchTab(h,"offer");renderContent(h);renderVideos(h);if(isAdmin){var ta=document.getElementById("edit-"+h);if(ta)ta.value=getContent(h)}}
 }
-function admTab(id){try{if(id==="sync")syncFillForm();if(id==="notifs")renderNotifs()}catch(e){}var cur=document.querySelector(".adm-panel.on"),same=cur&&cur.id==="adm-"+id;document.querySelectorAll(".adm-panel").forEach(function(p){p.classList.toggle("on",!same&&p.id==="adm-"+id)});document.querySelectorAll(".adm-tab").forEach(function(b){b.classList.toggle("on",!same&&b.dataset.adm===id)})}
+function admTab(id){try{if(id==="sync")syncFillForm();if(id==="notifs")renderNotifs();if(id==="groups")fillGroupNames()}catch(e){}var cur=document.querySelector(".adm-panel.on"),same=cur&&cur.id==="adm-"+id;document.querySelectorAll(".adm-panel").forEach(function(p){p.classList.toggle("on",!same&&p.id==="adm-"+id)});document.querySelectorAll(".adm-tab").forEach(function(b){b.classList.toggle("on",!same&&b.dataset.adm===id)})}
 function menu(o){if(o)closeNotifs();document.body.classList.toggle("menu",o);document.getElementById("bg").setAttribute("aria-expanded",String(o))}
 document.getElementById("bg").onclick=function(){menu(!document.body.classList.contains("menu"))};
 document.getElementById("ov").onclick=function(){menu(false)};
@@ -1366,7 +1430,7 @@ function saveFile(){
 }
 /* ===== navigation bar ===== */
 function goHome(){closeNotifs();if((location.hash||"#home")==="#home"){window.scrollTo(0,0)}else{location.hash="#home"}}
-function openNotifs(){checkAdmin();renderNotifs();document.body.classList.add("np");menu(false);markNotifsSeen();var b=document.getElementById("tb-notifs");if(b)b.classList.add("on")}
+function openNotifs(){checkAdmin();renderNotifs();renderNotifPerm();document.body.classList.add("np");menu(false);markNotifsSeen();var b=document.getElementById("tb-notifs");if(b)b.classList.add("on")}
 function closeNotifs(){document.body.classList.remove("np");var b=document.getElementById("tb-notifs");if(b)b.classList.remove("on")}
 function toggleNotifs(){if(document.body.classList.contains("np"))closeNotifs();else openNotifs()}
 /* ===== helpers (no browser dialogs: they are blocked in some in-app viewers) ===== */
@@ -1386,7 +1450,7 @@ function notifSeen(){return Number(lsGet("gym-notif-seen","0")||0)}
 function updateNotifBadge(){
   var b=document.getElementById("notif-badge");if(!b)return;
   var seen=notifSeen(),n=loadNotifs().filter(function(x){return Number(x.ts)>seen}).length;
-  b.textContent=n>99?"99+":String(n);b.style.display=n>0?"block":"none";try{if(navigator.setAppBadge){if(n>0)navigator.setAppBadge(n);else navigator.clearAppBadge()}}catch(e){}
+  b.textContent=n>99?"99+":String(n);b.style.display=n>0?"block":"none";try{var tot=n+(typeof chatTotalUnread==="function"?chatTotalUnread():0);if(navigator.setAppBadge){if(tot>0)navigator.setAppBadge(tot);else navigator.clearAppBadge()}}catch(e){}
 }
 function markNotifsSeen(){
   var mx=0;loadNotifs().forEach(function(x){if(Number(x.ts)>mx)mx=Number(x.ts)});
@@ -1480,64 +1544,228 @@ function renderAllResults(){
   if(!n)list.appendChild(ce("p","mute","مفيش نتائج لسه"));
 }
 
-/* ===== group chat ===== */
-var CHAT_NAMES={kickbox:"كيك بوكس",champs:"الأبطال"};
-var chat={room:null,el:null,es:null,poll:null,msgs:{},pending:{},nodes:{},first:true,rec:null};
+/* ===== group chat + private chat + calls ===== */
+var CHAT_DEF={kickbox:"كيك بوكس",champs:"الأبطال"},CHAT_GROUPS=["kickbox","champs"];
+var chat={room:null,el:null,es:null,poll:null,msgs:{},pending:{},nodes:{},first:true,rec:null,self:null};
+var chatMeta={},chatMetaES=null,chatMetaPoll=null,chatNotified=null,chatPlaying=null;
 var ICO_IMG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>';
 var ICO_MIC='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>';
 var ICO_SEND='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>';
+var ICO_PHONE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>';
+var ICO_VID='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="13" height="12" rx="2"/><path d="M22 8l-7 4 7 4z"/></svg>';
+var ICO_GRP='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+
+/* ---- helpers ---- */
 function chatProfile(){try{var p=JSON.parse(lsGet("gym-chat-profile","null")||"null");return p&&p.name?p:null}catch(e){return null}}
 function chatUid(){var u=lsGet("gym-chat-uid","");if(!u){u=Math.random().toString(36).slice(2,10)+Date.now().toString(36);lsSet("gym-chat-uid",u)}return u}
-function chatUrl(room,query,key){var c=syncCfg();return c.url.replace(/\/+$/,"")+"/chats/"+encodeURIComponent(c.code)+"/"+room+(key?"/"+encodeURIComponent(key):"")+".json"+(query||"")}
+function chatBase(){var c=syncCfg();return c.url.replace(/\/+$/,"")+"/chats/"+encodeURIComponent(c.code)}
+function chatUrl(room,query,key){return chatBase()+"/"+room+(key?"/"+encodeURIComponent(key):"")+".json"+(query||"")}
+function chatIsPc(room){return String(room||"").indexOf("pc-")===0}
+function chatClientById(id){return loadPClients().find(function(c){return c.id===id})||null}
+function chatRoomsCfg(){try{var o=JSON.parse(lsGet("gym-chat-rooms","{}")||"{}");return o&&typeof o==="object"?o:{}}catch(e){return{}}}
+function chatName(room){
+  if(chatIsPc(room)){var c=chatClientById(room.slice(3));return isAdmin?(c?c.name:"عميل"):"الكابتن"}
+  var cfg=chatRoomsCfg();return(cfg[room]&&String(cfg[room]).trim())||CHAT_DEF[room]||room;
+}
+function chatSelf(room){
+  if(chatIsPc(room)){
+    if(isAdmin)return{uid:"captain",name:"الكابتن",phone:""};
+    var id=room.slice(3);if(lsGet("gym-pc-auth","")!==id)return null;
+    var c=chatClientById(id);return c?{uid:"cl-"+id,name:c.name||"عميل",phone:""}:null;
+  }
+  var p=chatProfile();return p?{uid:p.uid,name:p.name,phone:p.phone||""}:null;
+}
+function treeApply(root,path,val,isPatch){
+  var parts=String(path||"/").split("/").filter(Boolean),k;
+  if(!parts.length){
+    if(isPatch){root=(root&&typeof root==="object")?root:{};if(val&&typeof val==="object")for(k in val){if(val[k]===null)delete root[k];else root[k]=val[k]}return root}
+    return(val&&typeof val==="object")?val:{};
+  }
+  root=(root&&typeof root==="object")?root:{};var node=root;
+  for(var i=0;i<parts.length-1;i++){if(!node[parts[i]]||typeof node[parts[i]]!=="object")node[parts[i]]={};node=node[parts[i]]}
+  var last=parts[parts.length-1];
+  if(isPatch){if(!node[last]||typeof node[last]!=="object")node[last]={};if(val&&typeof val==="object")for(k in val){if(val[k]===null)delete node[last][k];else node[last][k]=val[k]}}
+  else{if(val===null)delete node[last];else node[last]=val}
+  return root;
+}
+function chatColor(name){var h=0;for(var i=0;i<name.length;i++)h=(h*31+name.charCodeAt(i))%360;return"hsl("+h+",70%,65%)"}
+function chatTime(t){if(typeof t!=="number")return"";var d=new Date(t);return("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)}
+function chatDayLabel(t){var d=new Date(t),n=new Date(),f=function(x){return Math.floor(new Date(x.getFullYear(),x.getMonth(),x.getDate()).getTime()/86400000)};var diff=f(n)-f(d);if(diff<=0)return"النهاردة";if(diff===1)return"امبارح";return d.toLocaleDateString("ar-EG",{day:"numeric",month:"long"})}
+function fmtSec(n){n=Math.max(0,Math.round(n));return Math.floor(n/60)+":"+("0"+(n%60)).slice(-2)}
+function chatInitial(n){n=String(n||"?").trim();return n?n.charAt(0):"?"}
+
+/* ---- unread / meta ---- */
+function chatSeenMap(){try{return JSON.parse(lsGet("gym-chat-seen","{}")||"{}")||{}}catch(e){return{}}}
+function chatSetSeen(room,n){var m=chatSeenMap();if(m[room]===n)return;m[room]=n;lsSet("gym-chat-seen",JSON.stringify(m))}
+function chatUnread(room){
+  var m=chatMeta[room],n=(m&&Number(m.n))||0,seen=chatSeenMap()[room];
+  if(seen==null)seen=0;
+  if(n<seen){chatSetSeen(room,n);seen=n}
+  return Math.max(0,n-seen);
+}
+function chatRelevantRooms(){
+  var out=CHAT_GROUPS.slice();
+  if(isAdmin){Object.keys(chatMeta).forEach(function(r){if(chatIsPc(r))out.push(r)})}
+  else{var id=lsGet("gym-pc-auth","");if(id)out.push("pc-"+id)}
+  return out;
+}
+function chatTotalUnread(){var t=0;CHAT_GROUPS.forEach(function(r){t+=chatUnread(r)});return t}
+function chatUiRefresh(){
+  var tot=chatTotalUnread(),b=document.getElementById("grp-badge");
+  if(b){b.textContent=tot>99?"99+":String(tot);b.style.display=tot>0?"block":"none"}
+  document.querySelectorAll("[data-unread]").forEach(function(el){var n=chatUnread(el.dataset.unread);el.textContent=n>99?"99+":String(n);el.style.display=n>0?"inline-block":"none"});
+  try{updateNotifBadge()}catch(e){}
+}
+function chatMetaEvent(data,isPatch){var d;try{d=JSON.parse(data)}catch(e){return}if(!d)return;chatMeta=treeApply(chatMeta,d.path||"/",d.data,isPatch);chatMetaChanged()}
+var chatBaselined=false;
+function chatMetaChanged(){
+  if(!chatBaselined){chatBaselined=true;var sm=chatSeenMap();CHAT_GROUPS.forEach(function(r){if(chatMeta[r]&&sm[r]==null)chatSetSeen(r,Number(chatMeta[r].n)||0)})}
+  if(chat.room&&!document.hidden&&chatMeta[chat.room])chatSetSeen(chat.room,Number(chatMeta[chat.room].n)||0);
+  var g=document.getElementById("group");if(g&&g.classList.contains("on"))renderGroupList();
+  chatUiRefresh();chatNotifyNew();
+}
+function chatMetaStop(){try{if(chatMetaES)chatMetaES.close()}catch(e){}chatMetaES=null;if(chatMetaPoll){clearInterval(chatMetaPoll);chatMetaPoll=null}}
+function chatMetaStart(){
+  chatMetaStop();if(!syncCfg().on)return;
+  var url=chatBase()+"/meta.json";
+  function poll(){fetch(url).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&typeof d==="object"){chatMeta=d;chatMetaChanged()}}).catch(function(){})}
+  poll();
+  try{
+    var es=new EventSource(url);chatMetaES=es;
+    es.addEventListener("put",function(e){chatMetaEvent(e.data,false)});
+    es.addEventListener("patch",function(e){chatMetaEvent(e.data,true)});
+    es.onerror=function(){if(!chatMetaPoll)chatMetaPoll=setInterval(poll,15000)};
+    es.onopen=function(){if(chatMetaPoll){clearInterval(chatMetaPoll);chatMetaPoll=null}};
+  }catch(e){chatMetaPoll=setInterval(poll,15000)}
+}
+document.addEventListener("visibilitychange",function(){if(!document.hidden&&chat.room&&chatMeta[chat.room]){chatSetSeen(chat.room,Number(chatMeta[chat.room].n)||0);chatUiRefresh()}});
+
+/* ---- phone notifications (work while the app is open or in the background) ---- */
+function pushLocal(title,body,tag){
+  if(!("Notification" in window)||Notification.permission!=="granted")return;
+  var o={body:body,tag:tag,icon:"apple-touch-icon.png",badge:"favicon.png",dir:"rtl",lang:"ar"};
+  try{
+    if(navigator.serviceWorker&&navigator.serviceWorker.getRegistration){
+      navigator.serviceWorker.getRegistration().then(function(reg){if(reg&&reg.showNotification)reg.showNotification(title,o);else new Notification(title,o)}).catch(function(){try{new Notification(title,o)}catch(e){}});
+      return;
+    }
+    new Notification(title,o);
+  }catch(e){}
+}
+function chatNotifyNew(){
+  var rooms=chatRelevantRooms();
+  if(chatNotified==null){chatNotified={};rooms.forEach(function(r){chatNotified[r]=(chatMeta[r]&&Number(chatMeta[r].n))||0});return}
+  rooms.forEach(function(r){
+    var m=chatMeta[r];if(!m)return;var n=Number(m.n)||0,prev=chatNotified[r];
+    if(prev==null)prev=0;
+    if(n<=prev){chatNotified[r]=n;return}
+    chatNotified[r]=n;
+    var me=chatSelf(r);if(me&&m.lu===me.uid)return;
+    if(document.hidden||chat.room!==r)pushLocal(chatName(r),(m.ln?m.ln+": ":"")+(m.lp||"رسالة جديدة"),"chat-"+r);
+  });
+}
+var adminNotifCount=null;
+function notifyNewAdminNotif(){
+  var seen=notifSeen(),n=loadNotifs().filter(function(x){return Number(x.ts)>seen}).length;
+  if(adminNotifCount!=null&&n>adminNotifCount&&document.hidden){var l=loadNotifs()[0];pushLocal("إشعار جديد",l?String(l.text).slice(0,100):"","notif")}
+  adminNotifCount=n;
+}
+function enablePhoneNotifs(){
+  if(!("Notification" in window)){toast("الجهاز ده مش بيدعم الإشعارات من المتصفح");return}
+  Notification.requestPermission().then(function(p){toast(p==="granted"?"تم تفعيل إشعارات الهاتف ✓":"الإشعارات متمنوعة. فعّلها من إعدادات الجهاز");renderNotifPerm()}).catch(function(){});
+}
+function permHtml(el){
+  if(!el)return;el.innerHTML="";
+  if(!("Notification" in window)){
+    el.style.display="block";el.textContent="عشان تظهر إشعارات على هاتفك: افتح التطبيق من الشاشة الرئيسية (ثبّته من سفاري ← مشاركة ← إضافة إلى الشاشة الرئيسية).";return;
+  }
+  if(Notification.permission==="granted"){el.style.display="none";return}
+  el.style.display="block";
+  if(Notification.permission==="denied"){el.textContent="إشعارات الهاتف متقفلة. فعّلها من إعدادات الجهاز للتطبيق.";return}
+  el.appendChild(ce("div","","فعّل إشعارات الهاتف عشان توصلك الرسائل الجديدة."));
+  var b=ce("button","btn","تفعيل الإشعارات");b.type="button";b.onclick=enablePhoneNotifs;el.appendChild(b);
+}
+function renderNotifPerm(){permHtml(document.getElementById("np-perm"));permHtml(document.getElementById("grp-perm"))}
+
+/* ---- group list + rename ---- */
+function chatTimeShort(t){if(typeof t!=="number")return"";return chatDayLabel(t)==="النهاردة"?chatTime(t):chatDayLabel(t)}
+function renderGroupList(){
+  var box=document.getElementById("grp-list");if(!box)return;box.innerHTML="";renderNotifPerm();
+  CHAT_GROUPS.forEach(function(room,i){
+    var m=chatMeta[room]||{},a=ce("a","grp-row");a.href="#chat-"+room;
+    var av=ce("div","grp-av g"+(i+1));av.innerHTML=ICO_GRP;
+    var mid=ce("div","grp-mid"),nm=ce("div","grp-nm");nm.appendChild(ce("b","",chatName(room)));
+    var bd=ce("i","tb-badge inl");bd.dataset.unread=room;nm.appendChild(bd);
+    mid.appendChild(nm);mid.appendChild(ce("div","grp-pv",m.lp?((m.ln?m.ln+": ":"")+m.lp):"لسه مفيش رسائل"));
+    a.appendChild(av);a.appendChild(mid);a.appendChild(ce("div","grp-tm",m.lt?chatTimeShort(Number(m.lt)):""));
+    box.appendChild(a);
+  });
+  chatUiRefresh();
+}
+function fillGroupNames(){CHAT_GROUPS.forEach(function(r){var i=document.getElementById("gname-"+r);if(i&&document.activeElement!==i)i.value=chatName(r)})}
+function saveGroupNames(){
+  if(!isAdmin)return;var o={};
+  CHAT_GROUPS.forEach(function(r){var v=(document.getElementById("gname-"+r).value||"").trim().slice(0,30);if(v)o[r]=v});
+  lsSet("gym-chat-rooms",JSON.stringify(o));renderGroupList();chatTitleRefresh();toast("تم حفظ أسماء الجروبات ✓");
+}
+function chatTitleRefresh(){var t=chatR("title");if(t&&chat.room)t.textContent=chatName(chat.room)}
+
+/* ---- room ---- */
 function chatQ(sel){return chat.el?chat.el.querySelector(sel):null}
 function chatR(name){return chatQ('[data-r="'+name+'"]')}
-function chatDot(st){var d=chatR("dot");if(d)d.className="ch-dot "+st}
+function chatDot(st){var d=chatR("dot");if(d)d.className="ch-dot "+st;var s2=chatR("sub");if(s2)s2.lastChild.textContent=st==="on"?"متصل":(st==="off"?"غير متصل":"جاري الاتصال...")}
 function chatErr(msg){var e=chatR("err");if(!e)return;e.textContent=msg||"";e.style.display=msg?"block":"none"}
 function chatHttpMsg(code){
-  if(code===401||code===403)return "الدردشة محتاجة صلاحية في Firebase: افتح Rules وضيف قسم chats (read/write: true) واضغط Publish.";
-  if(code===404)return "قاعدة البيانات مش موجودة على الرابط ده. راجع رابط المزامنة في الإدارة.";
-  return "مشكلة في الاتصال (HTTP "+code+")";
+  if(code===401||code===403)return"الدردشة محتاجة صلاحية في Firebase: افتح Rules وضيف قسم chats (read/write: true) واضغط Publish.";
+  if(code===404)return"قاعدة البيانات مش موجودة على الرابط ده. راجع رابط المزامنة في الإدارة.";
+  return"مشكلة في الاتصال (HTTP "+code+")";
 }
 function chatOpen(room){
-  if(!CHAT_NAMES[room])return;
+  var isPc=chatIsPc(room);
+  if(!isPc&&CHAT_GROUPS.indexOf(room)<0)return;
   chatClose();
-  var el=document.getElementById("chat-"+room);if(!el)return;
-  chat.room=room;chat.el=el;chat.msgs={};chat.pending={};chat.nodes={};chat.first=true;
-  el.innerHTML='<div class="ch-head"><a class="ch-back" href="#group" aria-label="رجوع">&rsaquo;</a><h2></h2><span class="ch-dot" data-r="dot"></span></div>'+
+  var el=document.getElementById(isPc?"chat-pc":"chat-"+room);if(!el)return;
+  chat.room=room;chat.el=el;chat.msgs={};chat.pending={};chat.nodes={};chat.first=true;chat.self=chatSelf(room);
+  var back=isPc?"#private":"#group";
+  var calls=isPc?'<div class="ch-calls"><button type="button" class="ch-ib" data-act="callv" aria-label="مكالمة صوتية">'+ICO_PHONE+'</button><button type="button" class="ch-ib" data-act="callvid" aria-label="مكالمة فيديو">'+ICO_VID+'</button></div>':'';
+  el.innerHTML='<div class="ch-top"><a class="ch-back" href="'+back+'" aria-label="رجوع">&rsaquo;</a><div class="ch-av" data-r="av"></div><div class="ch-ti"><b data-r="title"></b><small data-r="sub"><span class="ch-dot" data-r="dot"></span><span>جاري الاتصال...</span></small></div>'+calls+'</div>'+
    '<div class="ch-err" data-r="err"></div>'+
    '<div class="card" data-r="profile" style="display:none"><h3 style="margin:0 0 10px">اكتب بياناتك عشان تدخل</h3><label class="mute">الاسم</label><input data-r="name" maxlength="30" placeholder="اسمك" style="margin:6px 0 10px"><label class="mute">رقم الموبايل (اختياري)</label><input data-r="phone" maxlength="20" inputmode="tel" dir="ltr" placeholder="01xxxxxxxxx" style="margin:6px 0 12px"><button class="btn" type="button" data-act="enter" style="width:100%">دخول الدردشة</button></div>'+
-   '<div data-r="chatbox" style="display:none"><div data-r="adminbar" style="display:none;margin-bottom:10px"><button class="btn alt" type="button" data-act="clear" style="width:100%">مسح كل رسائل الجروب</button></div><div class="ch-list" data-r="list"></div></div>'+
+   '<div data-r="chatbox" style="display:none"><div data-r="adminbar" style="display:none;margin-bottom:10px"><button class="btn alt" type="button" data-act="clear" style="width:100%">مسح كل الرسائل</button></div><div class="ch-list" data-r="list"></div></div>'+
    '<div class="ch-composer" data-r="composer" style="display:none">'+
      '<div class="ch-rec" data-r="rec"><span class="ch-rec-dot"></span><b data-r="rectime">0:00</b><button type="button" class="ch-ib" data-act="reccancel" aria-label="إلغاء">&#10005;</button><button type="button" class="ch-ib send" data-act="recsend" aria-label="إرسال">'+ICO_SEND+'</button></div>'+
      '<div class="ch-row" data-r="row"><button type="button" class="ch-ib" data-act="img" aria-label="صورة">'+ICO_IMG+'</button><input type="file" accept="image/*" data-r="file" hidden><textarea data-r="text" rows="1" placeholder="اكتب رسالة..."></textarea><button type="button" class="ch-ib" data-act="mic" data-r="micbtn" aria-label="رسالة صوتية">'+ICO_MIC+'</button><button type="button" class="ch-ib send" data-act="send" data-r="sendbtn" style="display:none" aria-label="إرسال">'+ICO_SEND+'</button></div>'+
    '</div>';
-  el.querySelector("h2").textContent=CHAT_NAMES[room];
+  chatTitleRefresh();chatR("av").textContent=chatInitial(chatName(room));
   el.onclick=chatClick;
   var tx=chatR("text");
   tx.oninput=function(){tx.style.height="auto";tx.style.height=Math.min(tx.scrollHeight,110)+"px";var has=tx.value.trim().length>0;chatR("sendbtn").style.display=has?"flex":"none";chatR("micbtn").style.display=has?"none":"flex"};
   tx.onkeydown=function(e){if(e.key==="Enter"&&!e.shiftKey&&window.innerWidth>700){e.preventDefault();chatSendText()}};
   chatR("file").onchange=function(){var f=this.files&&this.files[0];this.value="";if(!f)return;toast("جاري تجهيز الصورة...");readFile(f).then(function(d){chatSend({k:"img",x:d})}).catch(function(e){toast(String(e))})};
-  if(!syncCfg().on){chatErr("المزامنة متوقفة. فعّلها من الإدارة عشان الدردشة تشتغل.");chatR("profile").style.display="none";return}
-  if(!chatProfile()){chatR("profile").style.display="block";return}
+  if(!syncCfg().on){chatErr("المزامنة متوقفة. فعّلها من الإدارة عشان الدردشة تشتغل.");return}
+  if(isPc&&!chat.self){chatErr("ادخل من صفحة Private بكود العميل الأول عشان تفتح الدردشة.");return}
+  if(!isPc&&!chat.self){chatR("profile").style.display="block";return}
   chatEnter();
 }
 function chatEnter(){
+  chat.self=chatSelf(chat.room);
   chatR("profile").style.display="none";chatR("chatbox").style.display="block";chatR("composer").style.display="block";
   var ab=chatR("adminbar");if(ab)ab.style.display=isAdmin?"block":"none";
+  if(chatMeta[chat.room])chatSetSeen(chat.room,Number(chatMeta[chat.room].n)||0);chatUiRefresh();
   chatFetch();chatConnect();
 }
 function chatClose(){
   try{if(chat.es)chat.es.close()}catch(e){}
   chat.es=null;if(chat.poll){clearInterval(chat.poll);chat.poll=null}
   try{chatRecStop(true)}catch(e){}
+  if(chatPlaying){try{chatPlaying.pause()}catch(e){}chatPlaying=null}
   if(chat.el){chat.el.innerHTML=""}
   chat.room=null;chat.el=null;chat.nodes={};chat.msgs={};chat.pending={};
 }
 function chatFetch(){
   var room=chat.room;if(!room)return;
   fetch(chatUrl(room,"?orderBy=%22%24key%22&limitToLast=60")).then(function(r){if(!r.ok){var e=new Error("HTTP");e.code=r.status;throw e}return r.json()}).then(function(d){
-    if(chat.room!==room)return;chatErr("");chatDot("on");
-    chat.msgs=d&&typeof d==="object"?d:{};chatRender();
+    if(chat.room!==room)return;chatErr("");chatDot("on");chat.msgs=d&&typeof d==="object"?d:{};chatRender();
   }).catch(function(e){if(chat.room!==room)return;chatDot("off");chatErr(e&&e.code?chatHttpMsg(e.code):"مفيش اتصال بقاعدة البيانات. اتأكد من النت وإن الملف مفتوح من سفاري أو من موقع مرفوع.")});
 }
 function chatConnect(){
@@ -1552,81 +1780,80 @@ function chatConnect(){
   }catch(e){startPoll()}
 }
 function chatEvent(data,isPatch){
-  var d;try{d=JSON.parse(data)}catch(e){return}
-  if(!d)return;var path=d.path||"/",val=d.data;
-  if(path==="/"){
-    if(isPatch){if(val&&typeof val==="object")for(var k in val){if(val[k]===null)delete chat.msgs[k];else chat.msgs[k]=val[k]}}
-    else chat.msgs=(val&&typeof val==="object")?val:{};
-  }else{
-    var parts=path.split("/").filter(Boolean);
-    if(parts.length===1){if(val===null)delete chat.msgs[parts[0]];else chat.msgs[parts[0]]=val}
-  }
-  chatErr("");chatRender();
+  var d;try{d=JSON.parse(data)}catch(e){return}if(!d)return;
+  chat.msgs=treeApply(chat.msgs,d.path||"/",d.data,isPatch);chatErr("");chatRender();
 }
 function chatOk(m){return m&&typeof m==="object"&&(m.k==="text"||m.k==="img"||m.k==="voice")&&typeof m.x==="string"}
-function chatColor(name){var h=0;for(var i=0;i<name.length;i++)h=(h*31+name.charCodeAt(i))%360;return "hsl("+h+",70%,65%)"}
-function chatTime(t){if(typeof t!=="number")return "";var d=new Date(t);return ("0"+d.getHours()).slice(-2)+":"+("0"+d.getMinutes()).slice(-2)}
-function fmtSec(n){n=Math.max(0,Math.round(n));return Math.floor(n/60)+":"+("0"+(n%60)).slice(-2)}
-function chatNode(key,m,pend){
-  var pr=chatProfile(),own=!!(pr&&m.u===pr.uid);
-  var d=ce("div","ch-msg"+(own?" own":"")+(pend?" pend":""));
-  if(!own){var nm=ce("span","nm");nm.style.color=chatColor(String(m.n||""));nm.textContent=String(m.n||"مجهول").slice(0,30);if(m.p){var ph=ce("small");ph.textContent=String(m.p).slice(0,20);nm.appendChild(ph)}d.appendChild(nm)}
-  if(m.k==="text"){var p=ce("p");p.textContent=String(m.x).slice(0,2000);d.appendChild(p)}
-  else if(m.k==="img"){if(/^data:image\//.test(m.x)){var im=document.createElement("img");im.src=m.x;im.loading="lazy";im.onclick=function(){var lb=document.getElementById("lb");lb.querySelector("img").src=m.x;lb.classList.add("on")};d.appendChild(im)}}
-  else if(m.k==="voice"){if(/^data:audio\//.test(m.x)){var a=document.createElement("audio");a.controls=true;a.preload="metadata";a.src=m.x;d.appendChild(a)}}
-  var t=ce("span","tm2");t.textContent=(m.k==="voice"&&m.d?"🎤 "+fmtSec(m.d)+"  ":"")+chatTime(m.t);d.appendChild(t);
-  if(isAdmin&&!pend&&key){var x=ce("button","cx","حذف");x.type="button";tapConfirm(x,function(){chatDelete(key)});d.appendChild(x)}
-  return d;
+function chatVoice(src,dur){
+  var w=ce("div","vp"),b=ce("button","vp-btn","▶"),bar=ce("div","vp-bar"),fill=ce("i"),tm=ce("span","vp-tm",fmtSec(dur||0));
+  b.type="button";bar.appendChild(fill);
+  var au=new Audio();au.preload="metadata";au.src=src;
+  b.onclick=function(){
+    if(au.paused){if(chatPlaying&&chatPlaying!==au)chatPlaying.pause();chatPlaying=au;var pr=au.play();if(pr&&pr.catch)pr.catch(function(){toast("مقدرتش أشغّل الصوت على الجهاز ده")})}else au.pause();
+  };
+  au.onplay=function(){b.textContent="❚❚"};au.onpause=function(){b.textContent="▶"};
+  au.onended=function(){b.textContent="▶";fill.style.width="0";tm.textContent=fmtSec(dur||0)};
+  au.ontimeupdate=function(){if(au.duration&&isFinite(au.duration)){fill.style.width=(au.currentTime/au.duration*100)+"%";tm.textContent=fmtSec(au.currentTime)}};
+  bar.onclick=function(e){if(au.duration&&isFinite(au.duration)){var r=bar.getBoundingClientRect();au.currentTime=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width))*au.duration}};
+  w.appendChild(b);w.appendChild(bar);w.appendChild(tm);return w;
+}
+function chatNode(key,m,pend,fail){
+  var me=chat.self,own=!!(me&&m.u===me.uid),group=!chatIsPc(chat.room);
+  var line=ce("div","ch-line"+(own?" own":"")+(pend?" pend":"")+(fail?" fail":""));
+  var av=ce("div","av",chatInitial(m.n));av.style.background=chatColor(String(m.n||""));line.appendChild(av);
+  var bub=ce("div","bub");
+  if(!own&&group){var nm=ce("span","nm");nm.style.color=chatColor(String(m.n||""));nm.textContent=String(m.n||"مجهول").slice(0,30);if(m.p){var ph=ce("small");ph.textContent=String(m.p).slice(0,20);nm.appendChild(ph)}bub.appendChild(nm)}
+  if(m.k==="text"){var p=ce("p");p.textContent=String(m.x).slice(0,2000);bub.appendChild(p)}
+  else if(m.k==="img"){if(/^data:image\//.test(m.x)){var im=document.createElement("img");im.className="pic";im.src=m.x;im.onclick=function(){var lb=document.getElementById("lb");lb.querySelector("img").src=m.x;lb.classList.add("on")};bub.appendChild(im)}}
+  else if(m.k==="voice"){if(/^data:audio\//.test(m.x))bub.appendChild(chatVoice(m.x,m.d))}
+  var mt=ce("div","mt");mt.appendChild(ce("span","",chatTime(m.t)));if(own)mt.appendChild(ce("span","",pend?"🕓":(fail?"⚠":"✓")));bub.appendChild(mt);
+  if(fail)bub.appendChild(ce("div","mt","فشل الإرسال — اضغط لإعادة المحاولة"));
+  if(isAdmin&&!pend&&key){var x=ce("button","cx","حذف");x.type="button";tapConfirm(x,function(){chatDelete(key)});bub.appendChild(x)}
+  line.appendChild(bub);return line;
 }
 function chatRender(){
   var list=chatR("list");if(!list)return;
-  var nb=(document.documentElement.scrollHeight-window.scrollY-window.innerHeight)<160,hadNew=false;
+  var nb=(document.documentElement.scrollHeight-window.scrollY-window.innerHeight)<180;
   var keys=Object.keys(chat.msgs).filter(function(k){return chatOk(chat.msgs[k])}).sort();
-  // drop pending that were delivered
   var delivered={};keys.forEach(function(k){var c=chat.msgs[k].c;if(c)delivered[c]=1});
-  Object.keys(chat.pending).forEach(function(c){if(delivered[c]&&!chat.pending[c].fail){delete chat.pending[c]}});
-  // remove nodes no longer present
-  Object.keys(chat.nodes).forEach(function(k){
-    var isP=k.indexOf("p:")===0,gone=isP?!chat.pending[k.slice(2)]||chat.pending[k.slice(2)].rendered!==chat.nodes[k].dataset.v:!chat.msgs[k]||!chatOk(chat.msgs[k]);
-    if(gone){if(chat.nodes[k].parentNode)chat.nodes[k].parentNode.removeChild(chat.nodes[k]);delete chat.nodes[k]}
+  Object.keys(chat.pending).forEach(function(c){if(delivered[c]&&!chat.pending[c].fail)delete chat.pending[c]});
+  var items=keys.map(function(k){return{id:k,key:k,m:chat.msgs[k],ver:"r"}});
+  Object.keys(chat.pending).forEach(function(c){var pm=chat.pending[c];items.push({id:"p:"+c,key:null,m:pm,pend:!pm.fail,fail:!!pm.fail,ver:pm.fail?"f":"p",cid:c})});
+  var had=false,alive={};
+  items.forEach(function(it){
+    alive[it.id]=1;var cur=chat.nodes[it.id];
+    if(!cur||cur.v!==it.ver){chat.nodes[it.id]={el:chatNode(it.key,it.m,it.pend,it.fail),v:it.ver};if(!cur)had=true;
+      if(it.fail){(function(cid,pm){chat.nodes[it.id].el.onclick=function(){delete chat.pending[cid];chatRender();chatSend(pm.msg)}})(it.cid,it.m)}}
   });
-  // add new real nodes in order
-  keys.forEach(function(k,i){
-    if(chat.nodes[k])return;
-    var n=chatNode(k,chat.msgs[k],false);chat.nodes[k]=n;hadNew=true;
-    var before=null;for(var j=i+1;j<keys.length;j++){if(chat.nodes[keys[j]]){before=chat.nodes[keys[j]];break}}
-    if(!before){var firstPend=list.querySelector(".ch-msg[data-p]");before=firstPend}
-    list.insertBefore(n,before||null);
+  Object.keys(chat.nodes).forEach(function(k){if(!alive[k])delete chat.nodes[k]});
+  list.textContent="";
+  var prev=null,prevDay=null;
+  items.forEach(function(it){
+    var node=chat.nodes[it.id].el,m=it.m,t=typeof m.t==="number"?m.t:Date.now(),day=chatDayLabel(t);
+    if(day!==prevDay){var sp=ce("div","ch-day");sp.appendChild(ce("span","",day));list.appendChild(sp);prevDay=day;prev=null}
+    node.classList.toggle("cont",!!(prev&&prev.u===m.u&&(t-prev.t)<300000));
+    list.appendChild(node);prev={u:m.u,t:t};
   });
-  // pending (sending / failed)
-  Object.keys(chat.pending).forEach(function(c){
-    var pm=chat.pending[c];if(chat.nodes["p:"+c])return;
-    var n=chatNode(null,pm,true);n.setAttribute("data-p","1");n.dataset.v=pm.rendered=String(Date.now())+c;
-    if(pm.fail){n.classList.remove("pend");n.classList.add("fail");var r=ce("span","tm2","⚠ فشل الإرسال — اضغط لإعادة المحاولة");n.appendChild(r);n.onclick=function(){delete chat.pending[c];chatRender();chatSend(pm.msg)}}
-    chat.nodes["p:"+c]=n;list.appendChild(n);hadNew=true;
-  });
-  if(hadNew&&(nb||chat.first)){setTimeout(function(){window.scrollTo(0,document.documentElement.scrollHeight)},30)}
+  if(had&&(nb||chat.first)){setTimeout(function(){window.scrollTo(0,document.documentElement.scrollHeight)},30)}
   if(keys.length)chat.first=false;
 }
-function chatSendText(){
-  var tx=chatR("text");if(!tx)return;var t=tx.value.trim();if(!t)return;
-  tx.value="";tx.oninput();chatSend({k:"text",x:t.slice(0,1000)});
-}
+function chatSendText(){var tx=chatR("text");if(!tx)return;var t=tx.value.trim();if(!t)return;tx.value="";tx.oninput();chatSend({k:"text",x:t.slice(0,1000)})}
+function chatPreview(msg){return msg.k==="img"?"📷 صورة":(msg.k==="voice"?"🎤 رسالة صوتية":String(msg.x).slice(0,60))}
 function chatSend(msg){
-  var pr=chatProfile(),room=chat.room;if(!pr||!room)return;
+  var me=chat.self,room=chat.room;if(!me||!room)return;
   var cid=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-  var body={n:pr.name,p:pr.phone||"",u:pr.uid,k:msg.k,x:msg.x,c:cid,t:{".sv":"timestamp"}};if(msg.d)body.d=msg.d;
+  var body={n:me.name,p:me.phone||"",u:me.uid,k:msg.k,x:msg.x,c:cid,t:{".sv":"timestamp"}};if(msg.d)body.d=msg.d;
   var local={n:body.n,p:body.p,u:body.u,k:body.k,x:body.x,c:cid,t:Date.now(),msg:msg};if(msg.d)local.d=msg.d;
   chat.pending[cid]=local;chat.first=true;chatRender();
   fetch(chatUrl(room),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(r){if(!r.ok){var e=new Error("HTTP");e.code=r.status;throw e}return r.json()}).then(function(j){
+    fetch(chatBase()+"/meta/"+room+".json",{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({n:{".sv":{"increment":1}},lt:{".sv":"timestamp"},lp:chatPreview(msg),ln:me.name,lu:me.uid})}).catch(function(){});
     if(chat.room!==room)return;
     delete chat.pending[cid];
     if(j&&j.name&&!chat.msgs[j.name]){var m2={n:body.n,p:body.p,u:body.u,k:body.k,x:body.x,c:cid,t:Date.now()};if(msg.d)m2.d=msg.d;chat.msgs[j.name]=m2}
     chatErr("");chatRender();
   }).catch(function(e){
     if(chat.room!==room)return;
-    local.fail=true;var old=chat.nodes["p:"+cid];if(old&&old.parentNode)old.parentNode.removeChild(old);delete chat.nodes["p:"+cid];
-    chatErr(e&&e.code?chatHttpMsg(e.code):"فشل الإرسال. اتأكد من النت.");chatRender();
+    local.fail=true;chatErr(e&&e.code?chatHttpMsg(e.code):"فشل الإرسال. اتأكد من النت.");chatRender();
   });
 }
 function chatDelete(key){
@@ -1646,9 +1873,11 @@ function chatClick(e){
   else if(act==="mic")chatRecStart();
   else if(act==="reccancel")chatRecStop(true);
   else if(act==="recsend")chatRecStop(false);
+  else if(act==="callv")callStart(false);
+  else if(act==="callvid")callStart(true);
   else if(act==="clear"){
-    if(b.dataset.arm!=="1"){b.dataset.arm="1";b.textContent="اضغط تاني لمسح كل الرسائل";setTimeout(function(){if(b.isConnected){b.dataset.arm="";b.textContent="مسح كل رسائل الجروب"}},3000);return}
-    var room=chat.room;fetch(chatUrl(room),{method:"DELETE"}).then(function(r){if(!r.ok)throw 0;chat.msgs={};chatRender();toast("تم مسح الرسائل")}).catch(function(){toast("فشل المسح")});
+    if(b.dataset.arm!=="1"){b.dataset.arm="1";b.textContent="اضغط تاني لمسح كل الرسائل";setTimeout(function(){if(b.isConnected){b.dataset.arm="";b.textContent="مسح كل الرسائل"}},3000);return}
+    var room=chat.room;fetch(chatUrl(room),{method:"DELETE"}).then(function(r){if(!r.ok)throw 0;fetch(chatBase()+"/meta/"+room+".json",{method:"PUT",body:JSON.stringify({n:0})}).catch(function(){});chat.msgs={};chatRender();toast("تم مسح الرسائل")}).catch(function(){toast("فشل المسح")});
   }
 }
 /* voice messages */
@@ -1672,12 +1901,164 @@ function chatRecStart(){
     };
     mr.start();
     chatR("row").style.display="none";chatR("rec").style.display="flex";chatR("rectime").textContent="0:00";
-    r.timer=setInterval(function(){var s2=(Date.now()-r.start)/1000;var el=chatR("rectime");if(el)el.textContent=fmtSec(s2);if(s2>=120)chatRecStop(false)},250);
+    r.timer=setInterval(function(){var s2=(Date.now()-r.start)/1000,el=chatR("rectime");if(el)el.textContent=fmtSec(s2);if(s2>=120)chatRecStop(false)},250);
   }).catch(function(){toast("لازم تسمح باستخدام الميكروفون")});
 }
 function chatRecStop(cancel){
   var r=chat.rec;if(!r)return;r.cancel=!!cancel;
   try{if(r.mr.state!=="inactive")r.mr.stop();else{r.stream.getTracks().forEach(function(t){t.stop()});chat.rec=null}}catch(e){chat.rec=null}
+}
+
+/* ===== voice / video calls (WebRTC, signalling through the database) ===== */
+var CALL_CFG={iceServers:[{urls:["stun:stun.l.google.com:19302","stun:stun1.l.google.com:19302"]}]};
+var call=null,callTree={},callES=null,callPoll=null,callHandled={},ringT=null,ringCtx=null;
+function callUrl(room,sub){return chatBase()+"/calls/"+room+(sub?"/"+sub:"")+".json"}
+function callPeerName(room){return chatIsPc(room)?(isAdmin?((chatClientById(room.slice(3))||{}).name||"العميل"):"الكابتن"):"مكالمة"}
+function callWatchStart(){
+  try{if(callES)callES.close()}catch(e){}callES=null;if(callPoll){clearInterval(callPoll);callPoll=null}
+  if(!syncCfg().on)return;
+  var url=chatBase()+"/calls.json";
+  function poll(){fetch(url).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&typeof d==="object"){callTree=d;callOnTree()}}).catch(function(){})}
+  poll();
+  try{
+    var es=new EventSource(url);callES=es;
+    function ev(e,p){var d;try{d=JSON.parse(e.data)}catch(x){return}if(!d)return;callTree=treeApply(callTree,d.path||"/",d.data,p);callOnTree()}
+    es.addEventListener("put",function(e){ev(e,false)});es.addEventListener("patch",function(e){ev(e,true)});
+    es.onerror=function(){if(!callPoll)callPoll=setInterval(poll,4000)};
+    es.onopen=function(){if(callPoll){clearInterval(callPoll);callPoll=null}};
+  }catch(e){callPoll=setInterval(poll,4000)}
+}
+function callGetMedia(video){return navigator.mediaDevices.getUserMedia({audio:true,video:video?{facingMode:"user"}:false})}
+function callMakePC(c,iceKey){
+  var pc=new RTCPeerConnection(CALL_CFG);c.pc=pc;c.localIce=[];c.sigReady=false;
+  pc.onicecandidate=function(e){
+    if(!e.candidate)return;
+    if(!c.sigReady){c.localIce.push(e.candidate.toJSON());return}
+    fetch(callUrl(c.room,iceKey),{method:"POST",body:JSON.stringify(e.candidate.toJSON())}).catch(function(){});
+  };
+  c.iceKey=iceKey;
+  pc.ontrack=function(e){c.remote=e.streams&&e.streams[0]?e.streams[0]:c.remote;callUpdateUI()};
+  pc.onconnectionstatechange=function(){
+    if(call!==c)return;
+    if(pc.connectionState==="connected"&&c.state!=="active"){c.state="active";c.t0=Date.now();clearTimeout(c.timer);callRing(false);callUpdateUI();c.tick=setInterval(callUpdateUI,1000)}
+    else if(pc.connectionState==="failed"){toast("فشل الاتصال بالمكالمة. ممكن الشبكة مش بتسمح");callEnd(true)}
+  };
+  return pc;
+}
+function callFlushLocalIce(c){c.sigReady=true;c.localIce.splice(0).forEach(function(cand){fetch(callUrl(c.room,c.iceKey),{method:"POST",body:JSON.stringify(cand)}).catch(function(){})})}
+function callStart(video){
+  if(call||!chat.room||!chatIsPc(chat.room))return;
+  var room=chat.room,me=chat.self;if(!me)return;
+  if(!navigator.mediaDevices||!window.RTCPeerConnection){toast("المكالمات مش مدعومة على المتصفح ده");return}
+  if(!syncCfg().on){toast("المزامنة لازم تكون شغالة");return}
+  callGetMedia(video).then(function(stream){
+    if(call){stream.getTracks().forEach(function(t){t.stop()});return}
+    var c={room:room,role:"caller",video:!!video,local:stream,iceQueue:[],iceSeen:{},state:"calling",peer:callPeerName(room),t0:0};call=c;
+    callUpdateUI();
+    var pc=callMakePC(c,"ice_caller");
+    stream.getTracks().forEach(function(t){pc.addTrack(t,stream)});
+    pc.createOffer().then(function(o){return pc.setLocalDescription(o).then(function(){return o})}).then(function(o){
+      return fetch(callUrl(room),{method:"PUT",body:JSON.stringify({state:"ringing",from:me.uid,fn:me.name,video:!!video,offer:{type:o.type,sdp:o.sdp},ts:{".sv":"timestamp"}})});
+    }).then(function(r){
+      if(!r.ok)throw new Error("HTTP "+r.status);
+      callFlushLocalIce(c);
+      c.timer=setTimeout(function(){if(call===c&&c.state!=="active"){toast("مفيش رد على المكالمة");callEnd(true)}},45000);
+    }).catch(function(){toast("مقدرتش أبدأ المكالمة. اتأكد من الاتصال والصلاحيات");callEnd(false)});
+  }).catch(function(){toast("لازم تسمح بالميكروفون"+(video?" والكاميرا":""))});
+}
+function callIncoming(room,c0){
+  var me=chatSelf(room);
+  call={room:room,role:"callee",video:!!c0.video,local:null,iceQueue:[],iceSeen:{},state:"incoming",peer:c0.fn||callPeerName(room),offer:c0.offer,t0:0,me:me};
+  callHandled[room+":"+c0.ts]=1;callRing(true);callUpdateUI();
+  pushLocal("مكالمة "+(c0.video?"فيديو":"صوتية")+" واردة",(c0.fn||"")+" بيتصل بيك","call");
+}
+function callAccept(){
+  var c=call;if(!c||c.state!=="incoming")return;
+  callRing(false);c.state="connecting";callUpdateUI();
+  callGetMedia(c.video).then(function(stream){
+    if(call!==c){stream.getTracks().forEach(function(t){t.stop()});return}
+    c.local=stream;var pc=callMakePC(c,"ice_callee");
+    stream.getTracks().forEach(function(t){pc.addTrack(t,stream)});
+    return pc.setRemoteDescription(c.offer).then(function(){return pc.createAnswer()}).then(function(a){return pc.setLocalDescription(a).then(function(){return a})}).then(function(a){
+      return fetch(callUrl(c.room),{method:"PATCH",body:JSON.stringify({state:"active",answer:{type:a.type,sdp:a.sdp}})});
+    }).then(function(){callFlushLocalIce(c);c.remoteSet=true;callOnTree()});
+  }).catch(function(){toast("لازم تسمح بالميكروفون"+(c.video?" والكاميرا":""));callEnd(true)});
+}
+function callOnTree(){
+  if(!call){
+    Object.keys(callTree).forEach(function(room){
+      var c=callTree[room];if(call||!c||c.state!=="ringing"||!c.offer)return;
+      var me=chatSelf(room);if(!me||c.from===me.uid)return;
+      if(callHandled[room+":"+c.ts])return;
+      if(Math.abs(Date.now()-Number(c.ts||0))>90000)return;
+      callIncoming(room,c);
+    });
+    return;
+  }
+  var c=callTree[call.room];if(!c)return;
+  if(c.state==="ended"&&!(call.role==="caller"&&call.state==="calling"&&!call.sigReady)){callEnd(false);return}
+  if(call.role==="caller"&&c.answer&&!call.answered&&call.pc){
+    call.answered=true;
+    call.pc.setRemoteDescription(c.answer).then(function(){call.remoteSet=true;callFlushIce()}).catch(function(){});
+  }
+  var other=call.role==="caller"?"ice_callee":"ice_caller",ice=c[other];
+  if(ice)Object.keys(ice).forEach(function(k){if(!call.iceSeen[k]){call.iceSeen[k]=1;call.iceQueue.push(ice[k])}});
+  callFlushIce();
+}
+function callFlushIce(){
+  if(!call||!call.pc||!call.pc.remoteDescription)return;
+  while(call.iceQueue.length){var cand=call.iceQueue.shift();try{call.pc.addIceCandidate(cand).catch(function(){})}catch(e){}}
+}
+function callEnd(notify){
+  if(!call)return;
+  var c=call,room=c.room;call=null;
+  clearTimeout(c.timer);clearInterval(c.tick);callRing(false);
+  try{if(c.pc)c.pc.close()}catch(e){}
+  [c.local,c.remote].forEach(function(s){if(s)s.getTracks().forEach(function(t){t.stop()})});
+  callUpdateUI();
+  if(notify){
+    fetch(callUrl(room),{method:"PATCH",body:JSON.stringify({state:"ended"})}).catch(function(){});
+    setTimeout(function(){fetch(callUrl(room),{method:"DELETE"}).catch(function(){})},4000);
+  }
+}
+function callRing(on){
+  if(on){
+    if(ringT)return;
+    var beep=function(){try{ringCtx=ringCtx||new(window.AudioContext||window.webkitAudioContext)();var o=ringCtx.createOscillator(),g=ringCtx.createGain();o.frequency.value=480;g.gain.value=.12;o.connect(g);g.connect(ringCtx.destination);o.start();setTimeout(function(){try{o.stop()}catch(e){}},420)}catch(e){}if(navigator.vibrate)navigator.vibrate([300,150,300])};
+    beep();ringT=setInterval(beep,1800);
+  }else{if(ringT){clearInterval(ringT);ringT=null}}
+}
+function callBtn(cls,svg,fn,label){var b=ce("button","call-b "+cls);b.type="button";b.innerHTML=svg;b.setAttribute("aria-label",label);b.onclick=fn;return b}
+var ICO_HANG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="transform:rotate(135deg)"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>';
+var ICO_MUTE='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v4"/></svg>';
+function callUpdateUI(){
+  var ov=document.getElementById("call-ov");if(!ov)return;
+  if(!call){ov.classList.remove("on","vid");document.getElementById("call-rv").srcObject=null;document.getElementById("call-lv").srcObject=null;return}
+  ov.classList.add("on");
+  var hasVid=call.video&&call.remote;
+  ov.classList.toggle("vid",!!hasVid);
+  document.getElementById("call-name").textContent=call.peer||"";
+  document.getElementById("call-av").textContent=chatInitial(call.peer);
+  var st={calling:"جاري الاتصال...",incoming:"مكالمة "+(call.video?"فيديو":"صوتية")+" واردة",connecting:"جاري التوصيل...",active:fmtSec((Date.now()-call.t0)/1000)}[call.state]||"";
+  document.getElementById("call-st").textContent=st;
+  var rv=document.getElementById("call-rv"),lv=document.getElementById("call-lv");
+  if(call.remote&&rv.srcObject!==call.remote)rv.srcObject=call.remote;
+  rv.style.display=hasVid?"block":"none";
+  if(call.video&&call.local){if(lv.srcObject!==call.local)lv.srcObject=call.local;lv.style.display="block"}else lv.style.display="none";
+  if(call.remote&&!call.video){var au=ov.querySelector("audio.call-au");if(!au){au=document.createElement("audio");au.className="call-au";au.autoplay=true;ov.appendChild(au)}if(au.srcObject!==call.remote)au.srcObject=call.remote}
+  var bt=document.getElementById("call-btns");
+  if(bt.dataset.state!==call.state){
+    bt.dataset.state=call.state;bt.innerHTML="";
+    if(call.state==="incoming"){
+      bt.appendChild(callBtn("red",ICO_HANG,function(){callEnd(true)},"رفض"));
+      bt.appendChild(callBtn("green",ICO_PHONE,callAccept,"رد"));
+    }else{
+      var mute=callBtn("",ICO_MUTE,function(){if(!call||!call.local)return;var t=call.local.getAudioTracks()[0];if(t){t.enabled=!t.enabled;mute.classList.toggle("off",!t.enabled)}},"كتم");
+      bt.appendChild(mute);
+      if(call.video)bt.appendChild(callBtn("",ICO_VID,function(e){if(!call||!call.local)return;var t=call.local.getVideoTracks()[0];if(t){t.enabled=!t.enabled;e.currentTarget.classList.toggle("off",!t.enabled)}},"الكاميرا"));
+      bt.appendChild(callBtn("red",ICO_HANG,function(){callEnd(true)},"إنهاء"));
+    }
+  }
 }
 
 /* ===== members: expired bar, codes, member page, shared weekly plan ===== */
@@ -1817,6 +2198,7 @@ function boot(){
   try{load();applyHome();SVCS.forEach(function(s){try{renderContent(s)}catch(e){}try{renderVideos(s)}catch(e){}});try{drawEx()}catch(e){}try{drawAdm()}catch(e){}try{checkAdmin()}catch(e){}try{route()}catch(e){}}catch(e){}
   try{updateNotifBadge()}catch(e){}
   try{syncInit()}catch(e){}
+  try{chatMetaStart();callWatchStart()}catch(e){}
   var pw=document.getElementById("pw");if(pw)pw.addEventListener("keydown",function(e){if(e.key==="Enter")doLogin()});
   var cs=document.getElementById("client-code-search");if(cs)cs.addEventListener("keydown",function(e){if(e.key==="Enter")searchClientByCode()});
   var pp=document.getElementById("private-pw");if(pp)pp.addEventListener("keydown",function(e){if(e.key==="Enter")unlockPrivate()});
@@ -1824,7 +2206,7 @@ function boot(){
 
 /* ===== Firebase sync (REST + live stream) ===== */
 var SYNC_DEF={url:"https://workshop-sync-ahmed-default-rtdb.europe-west1.firebasedatabase.app",code:"workshop-ahmed-2027"};
-var SYNC_RE=/^(gym-members|gym-home|gym-ex-videos|gym-pclients|gym-members-plan|gym-notifs|gym-content-[\w-]+|gym-results-[\w-]+|gym-videos-[\w-]+)$/;
+var SYNC_RE=/^(gym-members|gym-home|gym-ex-videos|gym-pclients|gym-members-plan|gym-chat-rooms|gym-notifs|gym-content-[\w-]+|gym-results-[\w-]+|gym-videos-[\w-]+)$/;
 var syncState={status:"idle",last:0,msg:"",es:null,timers:{},poll:null,busy:null};
 function syncCfg(){var c={};try{c=JSON.parse(lsGet("gym-sync-cfg","{}")||"{}")}catch(e){}if(c.v!==2){c={on:c.on}}var u=(c.url||SYNC_DEF.url).trim(),mo=u.match(/^https?:\/\/[^\/\s?#]+/i);if(mo)u=mo[0];return{url:u,code:(c.code||SYNC_DEF.code).trim(),on:c.on===false?false:true}}
 function syncBase(){var c=syncCfg();return c.url.replace(/\/+$/,"")+"/gyms/"+encodeURIComponent(c.code)}
@@ -1865,7 +2247,8 @@ function syncRefresh(k){
       var dash=document.getElementById("client-dashboard"),cs=document.getElementById("client-code-search");
       if(dash&&dash.style.display==="block"&&cs&&cs.value)searchClientByCode();
     }
-    else if(k==="gym-notifs"){updateNotifBadge();try{renderAdmNotifs()}catch(e){}if(document.body.classList.contains("np")&&!document.getElementById("np-box").contains(document.activeElement)){renderNotifs();markNotifsSeen()}}
+    else if(k==="gym-chat-rooms"){try{renderGroupList();chatTitleRefresh();fillGroupNames()}catch(e){}}
+    else if(k==="gym-notifs"){notifyNewAdminNotif();updateNotifBadge();try{renderAdmNotifs()}catch(e){}if(document.body.classList.contains("np")&&!document.getElementById("np-box").contains(document.activeElement)){renderNotifs();markNotifsSeen()}}
     else if(k.indexOf("gym-videos-")===0){var s3=k.slice(11),vb=document.getElementById("videos-"+s3);if(!(vb&&vb.contains(document.activeElement)))renderVideos(s3)}
     else if(k.indexOf("gym-content-")===0){var s1=k.slice(12);renderContent(s1);var ta=document.getElementById("edit-"+s1);if(ta&&document.activeElement!==ta)ta.value=getContent(s1)}
     else if(k.indexOf("gym-results-")===0){var s2=k.slice(12),bx=document.getElementById("results-"+s2);if(!(bx&&bx.contains(document.activeElement)))renderResults(s2);if(document.getElementById("allresults").classList.contains("on"))renderAllResults()}
@@ -1948,7 +2331,7 @@ function saveSync(){
   if(!/^https:\/\/\S+$/.test(u)){alert("رابط قاعدة البيانات لازم يبدأ بـ https://");return}
   if(!cd||/[.$#\[\]\/\s]/.test(cd)){alert("كود الجيم مينفعش فيه مسافات أو . $ # [ ] /");return}
   lsSet("gym-sync-cfg",JSON.stringify({v:2,url:u,code:cd,on:on}));
-  syncStop();syncRender();
+  syncStop();syncRender();try{chatMetaStart();callWatchStart()}catch(e){}
   var res=document.getElementById("sync-result");
   if(!on){if(res)res.textContent="تم الحفظ، المزامنة متوقفة.";return}
   syncNow(true);
