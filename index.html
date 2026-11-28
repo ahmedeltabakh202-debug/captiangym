@@ -793,8 +793,7 @@ section.enter>*:nth-child(9),section.enter .grp-list>*:nth-child(9),section.ente
     </div>
     <div class="card" style="margin-top:14px">
       <h3 style="margin:0 0 6px">باسورد الدخول للجروب</h3>
-      <p class="mute" style="margin:0 0 10px;font-size:.88rem">اختار الجروب اللي العميل طلبه (مكتوب في رسالة الواتساب)، واكتب كود جهازه. الباسورد بيطلع مخصوص للجروب ده بس، ومش بيفتح أي جروب تاني.</p>
-      <select id="gp-room" onfocus="grpCalc()" onchange="grpCalc()" style="margin-bottom:10px"></select>
+      <p class="mute" style="margin:0 0 10px;font-size:.88rem">اكتب كود جهاز العميل اللي وصلك على واتساب (الجروب مكتوب في الرسالة)، والباسورد = الكود × ١١. كل جروب ليه كود مختلف على الجهاز، فباسورد جروب مش بيفتح التاني.</p>
       <input id="gp-code" inputmode="numeric" dir="ltr" placeholder="كود جهاز العميل" oninput="grpCalc()" style="margin-bottom:10px">
       <div id="gp-out" class="gp-out"></div>
       <button class="btn alt" type="button" onclick="grpCopyPass()" style="width:100%">نسخ الباسورد</button>
@@ -2494,8 +2493,8 @@ function drawPhotoAdmin(){
 var grpMembers={},callClockOff=0,callLive=false,grpAdminT=null;
 function grpAllowed(room){return isAdmin||lsGet("gym-grp-ok-"+room,"")==="1"}
 function grpCode(room){var k="gym-grp-code-"+room,c=lsGet(k,"");if(!c){c=String(Math.floor(10000+Math.random()*90000));lsSet(k,c)}return c}
-var GRP_MUL={kickbox:17,champs:19};
-function grpPass(code,room){return String(Number(code)*(GRP_MUL[room]||0))}
+function grpPass(code){return String(Number(code)*11)}
+function grpDigits(v){return String(v||"").replace(/[\u0660-\u0669]/g,function(d){return d.charCodeAt(0)-1632}).replace(/[\u06F0-\u06F9]/g,function(d){return d.charCodeAt(0)-1776}).replace(/\D/g,"")}
 function grpMemUrl(room,uid){return chatBase()+"/gm/"+room+(uid?"/"+encodeURIComponent(uid):"")+".json"}
 function grpWaUrl(room,renew){
   var t=renew?"السلام عليكم يا كابتن، عايز أجدد اشتراكي في جروب «"+chatName(room)+"». كود جهازي: "+grpCode(room)
@@ -2558,10 +2557,10 @@ function grpShowErr(m){var e=chatR("gerr");if(e){e.textContent=m;e.style.display
 function grpHttp(r){if(r.ok)return r;var e=new Error("HTTP "+r.status);e.code=r.status;return r.text().then(function(t){e.body=t;throw e},function(){throw e})}
 function grpSubmit(){
   var room=chat.room;if(!room)return;
-  var pw=(chatR("gpw").value||"").trim(),nm=(chatR("gname").value||"").trim().slice(0,30),ph=(chatR("gphone").value||"").trim().slice(0,20);
+  var pw=grpDigits(chatR("gpw").value),nm=(chatR("gname").value||"").trim().slice(0,30),ph=(chatR("gphone").value||"").trim().slice(0,20);
   var ge=chatR("gerr");if(ge)ge.style.display="none";
   if(!nm){toast("اكتب اسمك الأول");return}
-  if(!GRP_MUL[room]||pw!==grpPass(grpCode(room),room)){toast("الباسورد غلط أو بتاع جروب تاني");return}
+  if(pw!==grpPass(grpCode(room))){var ge2=chatR("gerr");if(ge2){ge2.textContent="الباسورد غلط. كود جهازك الحالي في الجروب ده: "+grpCode(room)+" . لو الكابتن عمل الباسورد لكود تاني، ابعتله الكود ده تاني من نفس التطبيق (من غير ما تمسح بيانات المتصفح).";ge2.style.display="block"}toast("الباسورد غلط أو بتاع جروب تاني");return}
   var uid=chatUid(),step="قراءة";
   fetch(grpMemUrl(room,uid)).then(grpHttp).then(function(r){return r.json()}).then(function(rec){
     if(rec&&rec.removed){grpShowLock(room,"كلّم الكابتن لو عايز ترجع.","removed");return}
@@ -2591,9 +2590,8 @@ function grpDiag(){
 }
 /* ---- captain side ---- */
 function grpCalc(){
-  var v=(document.getElementById("gp-code").value||"").trim(),o=document.getElementById("gp-out"),rs=document.getElementById("gp-room");if(!o)return;
-  if(rs&&!rs.options.length)CHAT_GROUPS.forEach(function(r){var op=document.createElement("option");op.value=r;op.textContent=chatName(r);rs.appendChild(op)});
-  o.textContent=(rs&&/^\d{3,9}$/.test(v))?grpPass(v,rs.value):"";
+  var v=grpDigits(document.getElementById("gp-code").value),o=document.getElementById("gp-out");if(!o)return;
+  o.textContent=/^\d{3,9}$/.test(v)?grpPass(v):"";
 }
 function grpCopyPass(){
   var t=(document.getElementById("gp-out")||{}).textContent;if(!t){toast("اكتب كود الجهاز الأول");return}
