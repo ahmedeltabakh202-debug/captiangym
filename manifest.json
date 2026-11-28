@@ -1,16 +1,16 @@
 {
   "id": "./",
-  "name": "Captain Gym",
-  "short_name": "Captain Gym",
-  "description": "Captain Gym - تدريب وتغذية وتأهيل",
+  "name": "NutraFittX",
+  "short_name": "NutraFittX",
+  "description": "NutraFittX - Ahmed ElMalla | Nutrition & Fitness",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0c0c0c",
-  "theme_color": "#0c0c0c",
   "lang": "ar",
   "dir": "rtl",
+  "background_color": "#0c0c0c",
+  "theme_color": "#0c0c0c",
   "icons": [
     {
       "src": "icon-192.png",
