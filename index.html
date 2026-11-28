@@ -793,7 +793,8 @@ section.enter>*:nth-child(9),section.enter .grp-list>*:nth-child(9),section.ente
     </div>
     <div class="card" style="margin-top:14px">
       <h3 style="margin:0 0 6px">باسورد الدخول للجروب</h3>
-      <p class="mute" style="margin:0 0 10px;font-size:.88rem">اكتب كود جهاز العميل اللي وصلك على واتساب، والباسورد = الكود × ١١. كل جروب ليه كود مختلف، فباسورد جروب مش بيفتح التاني.</p>
+      <p class="mute" style="margin:0 0 10px;font-size:.88rem">اختار الجروب اللي العميل طلبه (مكتوب في رسالة الواتساب)، واكتب كود جهازه. الباسورد بيطلع مخصوص للجروب ده بس، ومش بيفتح أي جروب تاني.</p>
+      <select id="gp-room" onfocus="grpCalc()" onchange="grpCalc()" style="margin-bottom:10px"></select>
       <input id="gp-code" inputmode="numeric" dir="ltr" placeholder="كود جهاز العميل" oninput="grpCalc()" style="margin-bottom:10px">
       <div id="gp-out" class="gp-out"></div>
       <button class="btn alt" type="button" onclick="grpCopyPass()" style="width:100%">نسخ الباسورد</button>
@@ -818,6 +819,13 @@ section.enter>*:nth-child(9),section.enter .grp-list>*:nth-child(9),section.ente
         <button class="btn alt" type="button" onclick="syncNow()">مزامنة الآن</button>
       </div>
       <p id="sync-result" class="mute" style="margin:12px 0 0"></p>
+    </div>
+    <h2>سيرفر المكالمات (TURN)</h2>
+    <div class="card" style="margin-bottom:14px">
+      <p class="mute" style="margin:0 0 10px;font-size:.88rem">من غيره المكالمات بتفشل على داتا الموبايل. اعمل حساب مجاني على metered.ca، وبعدين الصق هنا رابط الـ credentials (بيبدأ بـ https://...metered.live/api/v1/turn/credentials?apiKey=...) أو JSON فيه iceServers. بيتحفظ مرة واحدة وكل الأجهزة بتستخدمه.</p>
+      <textarea id="turn-cfg" dir="ltr" rows="3" autocomplete="off" placeholder="https://YOURAPP.metered.live/api/v1/turn/credentials?apiKey=..." style="margin:0 0 12px"></textarea>
+      <button class="btn" type="button" onclick="saveTurn()">حفظ سيرفر TURN</button>
+      <p id="turn-result" class="mute" style="margin:12px 0 0"></p>
     </div>
     <p class="mute" style="font-size:.85rem">المزامنة بتشتغل تلقائي على أي جهاز بيفتح التطبيق بنفس الكود، وأي تعديل بيظهر عند الكل لحظيًا.</p>
     </div>
@@ -1866,7 +1874,7 @@ function renderGroupList(){
   });
   chatUiRefresh();
 }
-function fillGroupNames(){CHAT_GROUPS.forEach(function(r){var i=document.getElementById("gname-"+r);if(i&&document.activeElement!==i)i.value=chatName(r)})}
+function fillGroupNames(){try{grpCalc()}catch(e){}CHAT_GROUPS.forEach(function(r){var i=document.getElementById("gname-"+r);if(i&&document.activeElement!==i)i.value=chatName(r)})}
 function saveGroupNames(){
   if(!isAdmin)return;var o={};
   CHAT_GROUPS.forEach(function(r){var v=(document.getElementById("gname-"+r).value||"").trim().slice(0,30);if(v)o[r]=v});
@@ -2086,7 +2094,34 @@ function chatRecStop(cancel){
 }
 
 /* ===== voice / video calls (WebRTC, signalling through the database) ===== */
-var CALL_CFG={iceServers:[{urls:["stun:stun.l.google.com:19302","stun:stun1.l.google.com:19302"]}]};
+var CALL_STUN=[{urls:["stun:stun.l.google.com:19302","stun:stun1.l.google.com:19302","stun:stun.cloudflare.com:3478"]}];
+var turnCache=null,turnAt=0;
+function turnParse(u){
+  u=String(u||"").trim();if(!u)return Promise.resolve(null);
+  if(u.charAt(0)==="["||u.charAt(0)==="{"){try{var j=JSON.parse(u);return Promise.resolve(Array.isArray(j)?j:(j.iceServers||[j]))}catch(e){return Promise.resolve(null)}}
+  if(/^https:\/\//.test(u))return fetch(u).then(function(r){return r.ok?r.json():null}).then(function(j){return Array.isArray(j)?j:(j&&j.iceServers)||null}).catch(function(){return null});
+  return Promise.resolve(null);
+}
+function callIce(){
+  var done=function(t){return{iceServers:CALL_STUN.concat(t||[]),iceCandidatePoolSize:2}};
+  if(turnCache&&Date.now()-turnAt<600000)return Promise.resolve(done(turnCache));
+  var load=fetch(chatBase()+"/turn.json").then(function(r){return r.ok?r.json():null}).then(function(v){return v&&v.u?turnParse(v.u):null}).then(function(arr){
+    if(Array.isArray(arr)&&arr.length){turnCache=arr;turnAt=Date.now()}return done(turnCache);
+  }).catch(function(){return done(turnCache)});
+  return Promise.race([load,new Promise(function(res){setTimeout(function(){res(done(turnCache))},4000)})]);
+}
+function saveTurn(){
+  var el=document.getElementById("turn-cfg"),res=document.getElementById("turn-result");if(!el)return;
+  var u=el.value.trim();if(!syncCfg().on){if(res)res.textContent="فعّل المزامنة الأول.";return}
+  if(u&&!/^https:\/\/\S+$/.test(u)&&u.charAt(0)!=="["&&u.charAt(0)!=="{"){if(res)res.textContent="لازم رابط يبدأ بـ https:// أو JSON.";return}
+  if(res)res.textContent="جاري الحفظ...";
+  turnCache=null;
+  (u?turnParse(u):Promise.resolve([])).then(function(arr){
+    if(u&&!(arr&&arr.length)){if(res)res.textContent="الرابط/الـJSON مش راجع سيرفرات. راجع الـ API key.";return}
+    return fetch(chatBase()+"/turn.json",{method:"PUT",body:JSON.stringify(u?{u:u}:null)}).then(function(r){if(!r.ok)throw 0;if(res)res.textContent=u?"تم الحفظ ✓ ("+arr.length+" سيرفر). كل الأجهزة هتستخدمه تلقائي.":"تم المسح."});
+  }).catch(function(){if(res)res.textContent="فشل الحفظ. اتأكد من المزامنة."});
+}
+function turnFill(){var el=document.getElementById("turn-cfg");if(!el||!syncCfg().on)return;fetch(chatBase()+"/turn.json").then(function(r){return r.ok?r.json():null}).then(function(v){if(v&&v.u)el.value=v.u}).catch(function(){})}
 var call=null,callTree={},callES=null,callPoll=null,callHandled={},ringT=null,ringCtx=null;
 function callUrl(room,sub){return chatBase()+"/calls/"+room+(sub?"/"+sub:"")+".json"}
 function callPeerName(room){return chatIsPc(room)?(isAdmin?((chatClientById(room.slice(3))||{}).name||"العميل"):"الكابتن"):"مكالمة"}
@@ -2107,19 +2142,38 @@ function callWatchStart(){
   }catch(e){callPoll=setInterval(poll,4000)}
 }
 function callGetMedia(video){return navigator.mediaDevices.getUserMedia({audio:true,video:video?{facingMode:"user"}:false})}
-function callMakePC(c,iceKey){
-  var pc=new RTCPeerConnection(CALL_CFG);c.pc=pc;c.localIce=[];c.sigReady=false;
+function callGoActive(c){
+  if(call!==c||c.state==="active")return;
+  c.state="active";c.t0=Date.now();clearTimeout(c.timer);callRing(false);callUpdateUI();c.tick=setInterval(callUpdateUI,1000);
+}
+function callFail(c){
+  if(call!==c)return;
+  toast("فشل الاتصال بالمكالمة. الشبكة محتاجة سيرفر TURN (الأدمن يضيفه من المزامنة)");callEnd(true);
+}
+function callMakePC(c,iceKey,cfg){
+  var pc=new RTCPeerConnection(cfg);c.pc=pc;c.localIce=[];c.sigReady=false;
   pc.onicecandidate=function(e){
     if(!e.candidate)return;
     if(!c.sigReady){c.localIce.push(e.candidate.toJSON());return}
     fetch(callUrl(c.room,iceKey),{method:"POST",body:JSON.stringify(e.candidate.toJSON())}).catch(function(){});
   };
   c.iceKey=iceKey;
-  pc.ontrack=function(e){c.remote=e.streams&&e.streams[0]?e.streams[0]:c.remote;callUpdateUI()};
+  pc.ontrack=function(e){
+    if(e.streams&&e.streams[0])c.remote=e.streams[0];
+    else{c.remote=c.remote||new MediaStream();c.remote.addTrack(e.track)}
+    callUpdateUI();
+  };
   pc.onconnectionstatechange=function(){
     if(call!==c)return;
-    if(pc.connectionState==="connected"&&c.state!=="active"){c.state="active";c.t0=Date.now();clearTimeout(c.timer);callRing(false);callUpdateUI();c.tick=setInterval(callUpdateUI,1000)}
-    else if(pc.connectionState==="failed"){toast("فشل الاتصال بالمكالمة. ممكن الشبكة مش بتسمح");callEnd(true)}
+    if(pc.connectionState==="connected")callGoActive(c);
+    else if(pc.connectionState==="failed")callFail(c);
+  };
+  pc.oniceconnectionstatechange=function(){
+    if(call!==c)return;
+    var st=pc.iceConnectionState;c.ice=st;
+    if(st==="connected"||st==="completed")callGoActive(c);
+    else if(st==="failed")callFail(c);
+    else callUpdateUI();
   };
   return pc;
 }
@@ -2129,11 +2183,12 @@ function callStart(video){
   var room=chat.room,me=chat.self;if(!me)return;
   if(!navigator.mediaDevices||!window.RTCPeerConnection){toast("المكالمات مش مدعومة على المتصفح ده");return}
   if(!syncCfg().on){toast("المزامنة لازم تكون شغالة");return}
-  callGetMedia(video).then(function(stream){
+  Promise.all([callGetMedia(video),callIce()]).then(function(rs){
+    var stream=rs[0],cfg=rs[1];
     if(call){stream.getTracks().forEach(function(t){t.stop()});return}
     var c={room:room,role:"caller",video:!!video,local:stream,iceQueue:[],iceSeen:{},state:"calling",peer:callPeerName(room),t0:0};call=c;
     callUpdateUI();
-    var pc=callMakePC(c,"ice_caller");
+    var pc=callMakePC(c,"ice_caller",cfg);
     stream.getTracks().forEach(function(t){pc.addTrack(t,stream)});
     pc.createOffer().then(function(o){return pc.setLocalDescription(o).then(function(){return o})}).then(function(o){
       return fetch(callUrl(room),{method:"PUT",body:JSON.stringify({state:"ringing",from:me.uid,fn:me.name,video:!!video,offer:{type:o.type,sdp:o.sdp},ts:{".sv":"timestamp"}})});
@@ -2141,7 +2196,7 @@ function callStart(video){
       if(!r.ok)throw new Error("HTTP "+r.status);
       callFlushLocalIce(c);
       pushSend({type:"to",to:[isAdmin?"cl-"+room.slice(3):"captain"],title:"مكالمة "+(video?"فيديو":"صوتية")+" واردة",body:me.name+" بيتصل بيك",url:pushUrl("#chat-"+room),call:true,tag:"call-"+room});
-      c.timer=setTimeout(function(){if(call===c&&c.state!=="active"){toast("مفيش رد على المكالمة");callEnd(true)}},45000);
+      c.timer=setTimeout(function(){if(call===c&&c.state!=="active"){toast(c.state==="connecting"?"المكالمة ما اتوصلتش. الشبكة محتاجة سيرفر TURN":"مفيش رد على المكالمة");callEnd(true)}},45000);
     }).catch(function(){toast("مقدرتش أبدأ المكالمة. اتأكد من الاتصال والصلاحيات");callEnd(false)});
   }).catch(function(){toast("لازم تسمح بالميكروفون"+(video?" والكاميرا":""))});
 }
@@ -2154,9 +2209,11 @@ function callIncoming(room,c0){
 function callAccept(){
   var c=call;if(!c||c.state!=="incoming")return;
   callRing(false);c.state="connecting";callUpdateUI();
-  callGetMedia(c.video).then(function(stream){
+  c.timer=setTimeout(function(){if(call===c&&c.state!=="active"){toast("المكالمة ما اتوصلتش. الشبكة محتاجة سيرفر TURN");callEnd(true)}},35000);
+  Promise.all([callGetMedia(c.video),callIce()]).then(function(rs){
+    var stream=rs[0],cfg=rs[1];
     if(call!==c){stream.getTracks().forEach(function(t){t.stop()});return}
-    c.local=stream;var pc=callMakePC(c,"ice_callee");
+    c.local=stream;var pc=callMakePC(c,"ice_callee",cfg);
     stream.getTracks().forEach(function(t){pc.addTrack(t,stream)});
     return pc.setRemoteDescription(c.offer).then(function(){return pc.createAnswer()}).then(function(a){return pc.setLocalDescription(a).then(function(){return a})}).then(function(a){
       return fetch(callUrl(c.room),{method:"PATCH",body:JSON.stringify({state:"active",answer:{type:a.type,sdp:a.sdp}})});
@@ -2177,7 +2234,7 @@ function callOnTree(){
   var c=callTree[call.room];if(!c)return;
   if(c.state==="ended"&&!(call.role==="caller"&&call.state==="calling"&&!call.sigReady)){callEnd(false);return}
   if(call.role==="caller"&&c.answer&&!call.answered&&call.pc){
-    call.answered=true;
+    call.answered=true;if(call.state==="calling"){call.state="connecting";callUpdateUI()}
     call.pc.setRemoteDescription(c.answer).then(function(){call.remoteSet=true;callFlushIce()}).catch(function(){});
   }
   var other=call.role==="caller"?"ice_callee":"ice_caller",ice=c[other];
@@ -2197,7 +2254,7 @@ function callEnd(notify){
   callUpdateUI();
   if(notify){
     fetch(callUrl(room),{method:"PATCH",body:JSON.stringify({state:"ended"})}).catch(function(){});
-    setTimeout(function(){fetch(callUrl(room),{method:"DELETE"}).catch(function(){})},4000);
+    setTimeout(function(){if(call&&call.room===room)return;fetch(callUrl(room),{method:"DELETE"}).catch(function(){})},4000);
   }
 }
 function callRing(on){
@@ -2219,12 +2276,13 @@ function callUpdateUI(){
   document.getElementById("call-name").textContent=call.peer||"";
   document.getElementById("call-av").textContent=chatInitial(call.peer);
   var st={calling:"جاري الاتصال...",incoming:"مكالمة "+(call.video?"فيديو":"صوتية")+" واردة",connecting:"جاري التوصيل...",active:fmtSec((Date.now()-call.t0)/1000)}[call.state]||"";
+  if(call.state==="connecting"&&call.ice)st+=" ("+({checking:"فحص الشبكة",new:"بدء",disconnected:"انقطاع",failed:"فشل"}[call.ice]||call.ice)+")";
   document.getElementById("call-st").textContent=st;
   var rv=document.getElementById("call-rv"),lv=document.getElementById("call-lv");
-  if(call.remote&&rv.srcObject!==call.remote)rv.srcObject=call.remote;
+  if(call.remote&&rv.srcObject!==call.remote){rv.srcObject=call.remote;try{var pr=rv.play();if(pr&&pr.catch)pr.catch(function(){})}catch(e){}}
   rv.style.display=hasVid?"block":"none";
   if(call.video&&call.local){if(lv.srcObject!==call.local)lv.srcObject=call.local;lv.style.display="block"}else lv.style.display="none";
-  if(call.remote&&!call.video){var au=ov.querySelector("audio.call-au");if(!au){au=document.createElement("audio");au.className="call-au";au.autoplay=true;ov.appendChild(au)}if(au.srcObject!==call.remote)au.srcObject=call.remote}
+  if(call.remote&&!call.video){var au=ov.querySelector("audio.call-au");if(!au){au=document.createElement("audio");au.className="call-au";au.autoplay=true;ov.appendChild(au)}au.setAttribute("playsinline","");if(au.srcObject!==call.remote){au.srcObject=call.remote;try{var pa=au.play();if(pa&&pa.catch)pa.catch(function(){ov.addEventListener("click",function f(){au.play();ov.removeEventListener("click",f)})})}catch(e){}}}
   var bt=document.getElementById("call-btns");
   if(bt.dataset.state!==call.state){
     bt.dataset.state=call.state;bt.innerHTML="";
@@ -2436,7 +2494,8 @@ function drawPhotoAdmin(){
 var grpMembers={},callClockOff=0,callLive=false,grpAdminT=null;
 function grpAllowed(room){return isAdmin||lsGet("gym-grp-ok-"+room,"")==="1"}
 function grpCode(room){var k="gym-grp-code-"+room,c=lsGet(k,"");if(!c){c=String(Math.floor(10000+Math.random()*90000));lsSet(k,c)}return c}
-function grpPass(code){return String(Number(code)*11)}
+var GRP_MUL={kickbox:17,champs:19};
+function grpPass(code,room){return String(Number(code)*(GRP_MUL[room]||0))}
 function grpMemUrl(room,uid){return chatBase()+"/gm/"+room+(uid?"/"+encodeURIComponent(uid):"")+".json"}
 function grpWaUrl(room,renew){
   var t=renew?"السلام عليكم يا كابتن، عايز أجدد اشتراكي في جروب «"+chatName(room)+"». كود جهازي: "+grpCode(room)
@@ -2480,7 +2539,7 @@ function grpGate(room){
   fetch(grpMemUrl(room,chatUid())).then(function(r){if(!r.ok){var e=new Error("HTTP");e.code=r.status;throw e}return r.json()}).then(function(rec){
     if(chat.room!==room)return;
     if(rec&&rec.removed){lsSet("gym-grp-ok-"+room,"");grpShowLock(room,"كلّم الكابتن لو عايز ترجع.","removed");return}
-    if(!rec){lsSet("gym-grp-ok-"+room,"");grpShowLock(room);return}
+    if(!rec||(rec.c&&String(rec.c)!==String(grpCode(room)))){lsSet("gym-grp-ok-"+room,"");grpShowLock(room);return}
     lsSet("gym-grp-until-"+room,String(rec.until||0));
     if(Number(rec.until)<=Date.now()){grpShowLock(room,"انتهى يوم "+grpDate(rec.until)+". بعد ما تدفع للكابتن هيفعّله وترجع تدخل من غير باسورد جديد.","expired");return}
     chat.self=chatSelf(room);grpLockHide();chatEnter();
@@ -2502,11 +2561,11 @@ function grpSubmit(){
   var pw=(chatR("gpw").value||"").trim(),nm=(chatR("gname").value||"").trim().slice(0,30),ph=(chatR("gphone").value||"").trim().slice(0,20);
   var ge=chatR("gerr");if(ge)ge.style.display="none";
   if(!nm){toast("اكتب اسمك الأول");return}
-  if(pw!==grpPass(grpCode(room))){toast("الباسورد غلط أو بتاع جروب تاني");return}
+  if(!GRP_MUL[room]||pw!==grpPass(grpCode(room),room)){toast("الباسورد غلط أو بتاع جروب تاني");return}
   var uid=chatUid(),step="قراءة";
   fetch(grpMemUrl(room,uid)).then(grpHttp).then(function(r){return r.json()}).then(function(rec){
     if(rec&&rec.removed){grpShowLock(room,"كلّم الكابتن لو عايز ترجع.","removed");return}
-    function done(){lsSet("gym-chat-profile",JSON.stringify({name:nm,phone:ph,uid:uid}));lsSet("gym-grp-ok-"+room,"1");try{pushIdentify()}catch(e){}grpGate(room)}
+    function done(){if(chat.room!==room)return;lsSet("gym-chat-profile",JSON.stringify({name:nm,phone:ph,uid:uid}));lsSet("gym-grp-ok-"+room,"1");try{pushIdentify()}catch(e){}grpGate(room)}
     if(rec){fetch(grpMemUrl(room,uid),{method:"PATCH",headers:{"Content-Type":"application/json"},body:JSON.stringify({n:nm,p:ph})}).catch(function(){});done();return}
     step="كتابة";
     var until=Date.now()+30*86400000;
@@ -2532,8 +2591,9 @@ function grpDiag(){
 }
 /* ---- captain side ---- */
 function grpCalc(){
-  var v=(document.getElementById("gp-code").value||"").trim(),o=document.getElementById("gp-out");if(!o)return;
-  o.textContent=/^\d{3,9}$/.test(v)?grpPass(v):"";
+  var v=(document.getElementById("gp-code").value||"").trim(),o=document.getElementById("gp-out"),rs=document.getElementById("gp-room");if(!o)return;
+  if(rs&&!rs.options.length)CHAT_GROUPS.forEach(function(r){var op=document.createElement("option");op.value=r;op.textContent=chatName(r);rs.appendChild(op)});
+  o.textContent=(rs&&/^\d{3,9}$/.test(v))?grpPass(v,rs.value):"";
 }
 function grpCopyPass(){
   var t=(document.getElementById("gp-out")||{}).textContent;if(!t){toast("اكتب كود الجهاز الأول");return}
@@ -2842,7 +2902,7 @@ function syncStream(){
     es.onerror=function(){syncErr("انقطع الاتصال اللحظي، بيحاول يعيد")};
   }catch(e){syncStartPoll()}
 }
-function syncFillForm(){var c=syncCfg(),u=document.getElementById("sync-url"),cd=document.getElementById("sync-code"),on=document.getElementById("sync-on");if(u)u.value=c.url;if(cd)cd.value=c.code;if(on)on.checked=c.on;syncRender()}
+function syncFillForm(){try{turnFill()}catch(e){}var c=syncCfg(),u=document.getElementById("sync-url"),cd=document.getElementById("sync-code"),on=document.getElementById("sync-on");if(u)u.value=c.url;if(cd)cd.value=c.code;if(on)on.checked=c.on;syncRender()}
 function syncRender(){
   var st=document.getElementById("sync-status");if(!st)return;
   var c=syncCfg(),txt,col;
